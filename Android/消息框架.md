@@ -1,0 +1,236 @@
+涉及到的4个类：`Handler`,`Looper`,`ThreadLocal`,`MessageQueue`。
+
+###1.ThreadLocal
+每个线程有一些和自己相关的变量，ThreadLocal的作用就是保存这些变量的。所有的变量是通过内部的静态类`Value`存储的。虽然，线程都是通过访问相同的`ThreadLocal`，但是每个线程保存的变量是分开的：
+
+```
+public void set(T value) {    
+      Thread currentThread = Thread.currentThread();    
+      Values values = values(currentThread);    
+      if (values == null) {        
+            values = initializeValues(currentThread);    }    
+      values.put(this, value);
+}
+```
+上面的set方法中，values方法返回当前线程的localValues成员变量：
+
+```
+/** 
+  * Gets Values instance for this thread and variable type. 
+  */
+Values values(Thread current) {    
+      return current.localValues;
+}
+```
+那么线程内部的localValues是什么？
+
+```
+public class Thread implements Runnable {
+    /** 
+      * Normal thread local values. 
+      */
+    ThreadLocal.Values localValues;
+    /*省略若干代码*/
+}
+```
+
+可以看到，`Thread`中的`localValues`是定义在`ThreadLocal`中线程本地的变量。如果在  `values ()`方法取得`null`值，就执行`initializeValues`方法。
+`initializeValues`是如何实现的呢？
+
+```
+Values initializeValues(Thread current) {    
+      return current.localValues = new Values();
+}
+```
+
+然后将value的值放在当前线程的的`localValues`里。这样，虽然看起来访问的是用一个ThreadLocal，但是得到的值却是根据线程而不同的。
+>不同sdk ThreadLocal内部的实现时不一样的，但是原理还是一样的
+
+**举个例子**
+
+```
+public class JsonTestMetaData {
+        public String json_str;
+}
+
+public class MainActivity extends Activity {
+
+	ThreadLocal<JsonTestMetaData> local = new ThreadLocal<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate");
+       
+        JsonTestMetaData data = new JsonTestMetaData();
+        data.json_str = "main_thread";
+        local.set(data);
+
+        Log.e(TAG, local.get().json_str);
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                JsonTestMetaData data = new JsonTestMetaData();
+                data.json_str = "other_thread";
+                local.set(data);
+                Log.e(TAG, local.get().json_str);
+            }
+        }).start();
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                if (local.get() != null) {
+                    Log.e(TAG, local.get().json_str);
+                } else {
+                    Log.e(TAG, "local.get() is null");
+
+                }
+            }
+        }).start();
+
+
+        Log.e(TAG, local.get().json_str);
+
+    }
+}
+```
+得到的结果：
+
+```
+01-09 14:28:36.410 29303-29303/com.sparkfengbo.app.javabcsxtest E/MainActivity: main_thread
+01-09 14:28:36.412 29303-29303/com.sparkfengbo.app.javabcsxtest E/MainActivity: main_thread
+01-09 14:28:36.412 29303-29331/com.sparkfengbo.app.javabcsxtest E/MainActivity: other_thread
+01-09 14:28:36.413 29303-29332/com.sparkfengbo.app.javabcsxtest E/MainActivity: local.get() is nul
+```
+
+###2.MessageQueue
+MessageQueue是一个消息队列，包含成员变量`Message mMessages;`，可以理解成链表的头部。存储的形式不是队列，而是单链表。
+内部包含5个native方法：
+```
+private native static long nativeInit();
+private native static void nativeDestroy(long ptr);
+private native static void nativePollOnce(long ptr, int timeoutMillis);
+private native static void nativeWake(long ptr);
+private native static boolean nativeIsIdling(long ptr);
+```
+主要是next方法，获得下一个消息；和`enqueueMessage` 将消息插入到队列中。
+
+###3.Looper
+Looper是做什么的？Looper的职能是为一个线程创建`MessageQueue`，绑定到这个线程，为此线程执行消息循环。 
+
+Looper包含MessageQueue和Thread，MessageQueue在prepare方法中创建
+在loop方法开始循环。
+
+Java层的Looper和MessageQueue有在C++对应的类，分别是Looper（Native）和NativeMessageQueue类
+
+线程默认是没有looper的，除非你在线程调用`prepare`方法，然后才能执行`loop`方法才能进行消息处理。
+
+`prepare`做了什么呢？
+
+```
+private static void prepare(boolean quitAllowed) {    
+      if (sThreadLocal.get() != null) {        
+          throw new RuntimeException("Only one Looper may be created per thread");    
+      }    
+      sThreadLocal.set(new Looper(quitAllowed));}
+```
+你可以看到`prepare()`方法只能调用一次。在最后会创建一个Looper放在ThreadLocal里保存。
+Looper是如何创建的呢？
+
+```
+private Looper(boolean quitAllowed) {    
+      mQueue = new MessageQueue(quitAllowed);    
+      mThread = Thread.currentThread();
+}
+```
+可以看到，构造方法是私有的，新创建了一个MessageQueue，mThread就是当前线程。
+那么Looper是如何执行消息循环的？
+
+
+```
+public static void loop() {    
+        /*中间省略若干代码*/
+        final Looper me = myLooper();    
+        if (me == null) {        
+              throw new RuntimeException("No Looper; Looper.prepare() wasn't called on this thread.");    
+        }    
+        final MessageQueue queue = me.mQueue;    
+        for (;;) {        
+              Message msg = queue.next();       
+              msg.target.dispatchMessage(msg);     
+              msg.recycleUnchecked();    
+        }
+}
+```
+可以看到，通过一个无限循环，不停的在消息队列中拿消息，将消息分发到指定的地方。
+>Message的target其实就是Handler
+
+
+所以，在你写的线程中，可以这样使用：
+
+
+```
+class LooperThread extends Thread {     
+      public Handler mHandler;      
+      public void run() {          
+            Looper.prepare();
+            mHandler = new Handler() {
+                  public void handleMessage(Message msg) {
+                       // process incoming messages here
+                  }
+            };
+            Looper.loop();
+     }
+}
+```
+
+不过上述的方式太low，在代码中也不方便，可以这样写：
+
+
+```
+HandlerThread thread  = new HandlerThread("new_handler_thread");
+        Handler handler = new Handler(thread.getLooper(), new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                return false;
+            }
+        });
+```
+
+HandlerThread继承自Thread，自身会创建一个Looper。
+
+
+
+大多数和消息循环的交互都是通过`Handler`去完成的，就像你在`Handler`那部分看到的那样。记得在你不再执行消息循环的时候调用`Looper`的`quit`方法。
+
+
+###4.Handler
+`Handler`能够发送和处理和`MessageQueue`关联的 `Message` 或 `Runnable`。每个`Handler`和一个单独的线程关联，这个线程就是你创建这个`Handler`的时候所在的线程，需要处理的`MessageQueue`也是这个线程的`MessageQueue`。不信，你看：
+
+```
+public Handler(Callback callback, boolean async) {    
+    /*省略若干代码*/
+    mLooper = Looper.myLooper();
+    if (mLooper == null) {    
+        throw new RuntimeException(        
+          "Can't create handler inside thread that has not called Looper.prepare()");}
+    mQueue = mLooper.mQueue;
+    mCallback = callback;
+    mAsynchronous = async;
+```
+
+Handler有很多个构造函数，最终都会调用到这个构造函数。你可以看到Handler中的的Looper成员，就是通过Looper的静态方法`myLooper`得到的，`myLooper`是干啥的？你可以往下看Looper的内容，在这里你只要知道得到了一个和这个线程关联的Looper。如果  `mLooper`成员是`null`，那么就抛出异常。你可能会问，我在activity中随便创建handler啊，没有调用`Looper.myLooper()`方法。那是因为当你的应用运行的时候，Android已经通过`Looper`的静态方法`prepareMainLooper`创建了，这个方法只能执行一次，否则就会抛出异常了。这个`Looper`适合线程绑定的，你再看看`mQueue`，是从`mLooper`中拿到的。
+
+调用的顺序如下：
+
+- Message的callback是否是null？不是调用callback的run方法（其实这里Message的callback是一个Runnable对象，通过Handler的post方法传递）
+- Handler的callback是否是null？不是调用callback。这里的callback的类型是`Handler.Callback()`
+- 最终调用Handler的handlerMessage的方法。
+
+
+###5. MessageQueue.IdleHandler
+
+- [《你知道android的MessageQueue.IdleHandler吗？》](https://zhuanlan.zhihu.com/p/30601168)
+
