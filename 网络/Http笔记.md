@@ -1,5 +1,16 @@
 [TOC]
 
+**参考** 
+
+- [HTTP,HTTP2.0,SPDY,HTTPS你应该知道的一些事](http://web.jobbole.com/87695/)
+- 《图解HTTP》
+
+
+
+
+-------
+
+
 - Http 简介
 - Http 状态码分类
 - HTTPS、SPDY

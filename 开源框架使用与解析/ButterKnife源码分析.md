@@ -9,6 +9,7 @@
 - [还在用枚举？我早就抛弃了！（Android 注解详解）](http://www.jianshu.com/p/1fb27f46622c)
 - [Android注解快速入门和实用解析](http://www.jianshu.com/p/9ca78aa4ab4d)
 - [深入理解Java：注解（Annotation）自定义注解入门](http://www.cnblogs.com/peida/archive/2013/04/24/3036689.html)
+- [Method详解](http://blog.csdn.net/zhangquanit/article/details/52927216)
 
 ####1.2 Java注解处理器
 
