@@ -102,18 +102,22 @@ final class Explore extends java.lang.Enum {
  - ElementType.PACKAGE 包声明
  - ElementType.PARAMETER 参数声明
  - ElementType.TYPE 类、接口（包括注解）或enum声明
- - 
+ 
+ 
 #####1.2.2.@Retention
 定义注解在哪一个级别可用，
 
 - RetentionPolicy.SOURCE 注解在编译器丢弃
 - RetentionPolicy.CLASS 注解在class文件可用，但会被VM丢弃
 - RetentionPolicy.RUNTIME VM将在运行期也保留注解，可以通过反射机制读取注解信息
+
 #####1.2.3.@Documented
 此注解包含在JavaDoc中
+
 #####1.2.4.@Inherited
 允许子类继承父类中的注解
 但是这并不是真的继承。通过使用@Inherited，只可以让子类类对象使用getAnnotations（）反射获取父类被@Inherited修饰的注解。
+
 ```
 @Inherited
 @Retention(RetentionPolicy.Runtime)
