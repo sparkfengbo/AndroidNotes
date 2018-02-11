@@ -1,3 +1,8 @@
+#### 参考文章
+
+- [Android App 优化之 ANR 详解](https://juejin.im/post/582582df0ce4630058bbbad2)
+- [浅谈ANR及log分析ANR](http://blog.csdn.net/itachi85/article/details/6918761)
+
 #####ANR类型
 
 - 1：KeyDispatchTimeout(5 seconds) --主要类型
@@ -74,4 +79,3 @@ THREAD_VMWAIT = 8, /* waiting on a VM resource */
 THREAD_SUSPENDED = 9, /* suspended, usually by GC or debugger */
 ```
 
-- [浅谈ANR及log分析ANR](http://blog.csdn.net/itachi85/article/details/6918761)

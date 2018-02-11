@@ -17,6 +17,7 @@
 - [RecyclerView初探](http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0719/3201.html)
 - [RecyclerView使用介绍](http://jcodecraeer.com/a/anzhuokaifa/androidkaifa/2014/1118/2004.html)
 - [RecyclerView 和 ListView 使用对比分析](https://github.com/D-clock/AndroidSystemUiTraining/blob/master/note/03_AndroidSystemUI%EF%BC%9ARecyclerView%E5%92%8CListView%E4%BD%BF%E7%94%A8%E5%AF%B9%E6%AF%94%E5%88%86%E6%9E%90.md)
+- [RecyclerView使用完全指南，是时候体验新控件了（二）](https://www.jianshu.com/p/7c3c549a0ec4)
 
   (非常详细的文章，总结了很多在使用RecylerView时遇到的问题和解决方法)
 

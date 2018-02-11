@@ -253,4 +253,4 @@ listview.setLayoutAnimation(controller);
 
 **2.Activity**
 overridePendingTransition(int enterAnim, int exitAnim);
-**在startActivity或finish之后调用才有效。**
+# **在startActivity或finish之后调用才有效。**

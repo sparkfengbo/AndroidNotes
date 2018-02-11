@@ -30,9 +30,9 @@
 ### 3.多进程可能会引起的问题
 
 - 1. 静态成员和单例模式失效
-- 2.线程同步机制失效
-- 3.SharedPreference可靠性下降
-- 4.Application会多次重建
+- 2. 线程同步机制失效
+- 3. SharedPreference可靠性下降
+- 4. Application会多次重建
 
 1、2是因为内存空间不一样了，锁或者全局类都不能保证线程同步，不同进程锁的不是同一个对象。
 
@@ -222,36 +222,75 @@ Android是基于Linux的，但是为什么需要新设计一个通信机制，Bi
 >Binder是在OpenBinder的基础上实现的。
 >
 
-*源码分析请参考《罗升阳 Android源代码情景分析》 第5章*
+
+
+Client进程和Server进程的一次通信涉及四种类型对象，分别是
+
+- 位于Binder驱动程序中的Binder实体对象（binder_node）
+- 位于Binder驱动程序中的Binder引用对象（binder_ref）
+- Binder库中的Binder本地对象（BBinder）
+- Binder库中的Binder代理对象（BpBinder）
+
+
+![过程]()
+
+**过程**
+
+
+- 1.运行在Client进程中的Binder代理对象通过Binder驱动程序向运行在Server进程中的Binder本地对象发出进程间通信请求，Binder驱动程序接着就根据Client进程传递来的Binder代理对象的句柄值找到对应的Binder引用对象
+- 2.Binder驱动程序根据前面找到的Binder引用对象找到对应的Binder实体对象，并创建一个事物（binder_transaction）来描述传递过来的通信数据发送给它处理
+- 3.Binder驱动程序根据前面找到的Binder实体对象来找到运行在Server进程中的Binder本地对象，并且将Client进程传递过来的通信数据发送给它处理
+- 4.Binder本地对象处理完成Client进程的通信请求后就将通信结果返回给Binder驱动程序，Binder驱动程序接着找到前面所创建的一个事物
+- 5.Binder驱动程序根据前面找到的事物的先关属性来找到发出通信请求的Client进程，并且通知Client进程将通信结果返回给对应的Binder代理对象处理
+
+
+可以看到涉及的四种对象类型都有相互依赖的关系，所以为了维护这些Binder对象的依赖关系，Binder通信机制采用**引用计数技术**维护每一个Binder对象声明周期。
+
+
+
+
+
+
 
 ----
 
+(TODO 底层原理待补充，太复杂了  )
+
+
+可参考文章
+
+- [Android Bander设计与实现 - 设计篇](http://blog.csdn.net/universus/article/details/6211589)
+- *源码分析请参考《罗升阳 Android源代码情景分析》 第5章*
+
+
+
+
 1.Binder进程间通信机制框架
 
-2.相关的知识
+2.相关的知识路线
 
-Binder驱动程序
+- Binder驱动程序
 
-Binder的驱动程序实现在内核空间中，目录接口是
+  - Binder的驱动程序实现在内核空间中，目录接口是
 
-```
+	```
 ~/Android/kernel/goldfish
 ----drivers
 	----staging
 		----android
 			----binder.h
 			----binder.c
-```
+	```
 
-设备文件 /dev/binder的打开（open）、内存映射（mmap）、内核缓冲区管理等
+	- 设备文件 /dev/binder的打开（open）、内存映射（mmap）、内核缓冲区管理等
 
-Service Manager的启动过程
+- Service Manager的启动过程
 
-Service Manager代理对象的获取
+- Service Manager代理对象的获取
 
-Service组件的启动过程
+- Service组件的启动过程
 
-Service代理对象的获取过程
+- Service代理对象的获取过程
 
-Binder进程间通信机制的Java接口
+- Binder进程间通信机制的Java接口
 
