@@ -1,10 +1,19 @@
-Android动画分为三种：
-1.View动画
-2.帧动画
-3.属性动画
+[TOC]
 
-####1.View动画(View Animation)
+Android动画分为三种：
+
+- 1.View动画
+- 2.帧动画
+- 3.属性动画
+
+本笔记还包括
+
+- 4.其他动画使用
+
+### 1.View动画(View Animation)
 [官方文档](https://developer.android.com/guide/topics/graphics/view-animation.html)
+
+作用对象是View，支持4种动画效果，分别是平移、缩放、旋转、透明度动画
 
 |--名称--|--标签--|--子类--|
 |---|---|---|
@@ -52,8 +61,11 @@ btn.startAnimation(anim);
 
 --或者，自定创建对应的Animation或者AnimationSet
 
+**自定义View动画**
 
-####2.帧动画(Drawable Animation)
+重写initialize和applyTransformation方法，参考 **Rotate3dAnimation**的例子（Google可查）
+
+### 2.帧动画(Drawable Animation)
 [官方文档](https://developer.android.com/guide/topics/graphics/drawable-animation.html)
 
 容易引起OOM，避免使用较大的图片
@@ -89,7 +101,13 @@ public boolean onTouchEvent(MotionEvent event) { 
 ####3.属性动画（Property Animation）
 [官方文档](https://developer.android.com/guide/topics/graphics/prop-animation.html)
 
-**ValueAnimator**：继承自**Animator**，计算值。
+##### 3.1 ValueAnimator、ObjectAnimator、AnimatorSet
+
+需要关注 ValueAnimator、ObjectAnimator、AnimatorSet
+
+**1.ValueAnimator**
+
+继承自**Animator**，计算值。
 
 ```
 ValueAnimator anim = ValueAnimator.ofFloat(0f, 1f);  
@@ -103,7 +121,9 @@ anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {  
 });  
 anim.start();  
 ```
-**ObjectAnimator**：继承自**ValueAnimator**，计算值并绑定到对象。
+**2.ObjectAnimator**
+
+继承自**ValueAnimator**，计算值并绑定到对象。
 
 ```
 ObjectAnimator animator = ObjectAnimator.ofFloat(textview, "alpha", 1f, 0f, 1f);  
@@ -115,7 +135,10 @@ animator.setDuration(5000);  
 animator.start();  
 ```
 
-**AnimatorSet**：该类提供了多个属性动画“协调工作”的途径，不同属性动画之间可以“同步执行”，亦可以“依次执行”，或者“延时执行”。
+**3.AnimatorSet**
+
+该类提供了多个属性动画“协调工作”的途径，不同属性动画之间可以“同步执行”，亦可以“依次执行”，或者“延时执行”。
+
 ```
 ObjectAnimator moveIn = ObjectAnimator.ofFloat(textview, "translationX", -500f, 0f);  
 ObjectAnimator rotate = ObjectAnimator.ofFloat(textview, "rotation", 0f, 360f);  
@@ -131,7 +154,6 @@ animSet.start();  
 - before(Animator anim)   将现有动画插入到传入的动画之前执行
 - with(Animator anim)   将现有动画和传入的动画同时执行
 
-----
 
 或：
 
@@ -161,25 +183,100 @@ set.setTarget(mButton);
 set.start();
 ```
 
-**另外：属性动画要求动画作用的对象必须提供该属性的get和set方法**
+##### 3.2 插值器
 
-解决：
+**作用**是根据时间流逝的百分比计算出当前属性值改变的百分比。
 
-- 修改代码，增加set和get
-- 用一个类去包装对象
-- 用ValueAnimator去监听动画执行的过程
+关于插值器的直观图参考最后的“附1：插值器”部分
+
+##### 3.3 估值器
+
+**作用**是根据当前属性值改变的百分比计算出改变后的属性值
+
+包括：
+
+- IntEvaluator（针对整型属性）
+- FloatEvaluator （针对浮点型属性）
+- ArgbEvaluator （针对Color属性）
 
 
-------
 
-**估值器**
-- IntEvaluator
-- FloatEvaluator
-- ArgbEvaluator
+>**另外：属性动画要求动画作用的对象必须提供该属性的get和set方法**（参考《Android开发艺术探索》 $7 P285）
+>
+>解决方法有3种：
+>
+>- 修改代码，增加set和get（如果有权限）
+>- 用一个类去包装原始对象，间接提供get、set方法
+>- 用ValueAnimator去监听动画执行的过程，自己实现属性的改变
+
+##### 3.4 属性动画原理
+
+都会调用到反射（去调用set、get方法，因为属性动画需要获得计算的属性值并将属性值设置到对象中）
+
+具体可参考《Android开发艺术探索》 $7 P292 或 《Android源码设计模式解析与实战》的 $7 策略模式
+
+### 4.其他动画使用
+
+#### 1.LayoutAnimation
+
+作用于ViewGroup，为ViewGroup指定一个动画，子元素都会有这个动画效果。
+
+具体看APIDemo，里面的比较有代表性。
+
+```
+<layoutAnimation 
+    xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:animation="@anim/anim_item" 
+    android:animationOrder="normal" 
+    android:delay="0.5">
+</layoutAnimation>
+```
+在xml布局文件中指定android:layoutAnimation属性：
+
+```
+
+<ListView android:layout_width="match_parent"   
+    android:layout_height="wrap_content"     
+    android:background="#fff4f7f9" 
+    android:cacheColorHint="#00000000" 
+    android:divider="#dddbdb" 
+    android:dividerHeight="1.0px" 
+    android:layoutAnimation="@anim/layout_animation" 
+    android:listSelector="@android:color/transparent"/>
+```
+
+通过Java代码指定动画：
+
+```
+ListView listview = (ListView) findViewById(R.id.listview);
+Animation animation = AnimationUtils.loadAnimation(TestAnimActivity.this, R.anim.anim_item);
+LayoutAnimationController controller = new LayoutAnimationController(animation);
+controller.setDelay(0.5f);
+controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
+listview.setLayoutAnimation(controller);
+```
+
+
+#### 2.Activity的切换效果
+
+overridePendingTransition(int enterAnim, int exitAnim);
+
+**在startActivity或finish之后调用才有效。**
+
+Fragment添加动画 通过 FragmentTransaction中的setCustomAnimations()方法添加切换动画
+
+
+#### 3.需要注意的问题
+
+- OOM
+- 内存泄漏
+- View动画（是对View的影响做动画，并没有真正改变View的状态）
+- 不要使用px
+- 硬件加速
 
 ----
 
-**插值器**
+**附1：插值器**
 - AccelerateDecelerateInterpolator
 ![AccelerateDecelerateInterpolator.png](http://upload-images.jianshu.io/upload_images/952890-506e9f3b1c7975ee.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 - AccelerateInterpolator
@@ -189,7 +286,6 @@ set.start();
 
 ![AnticipateInterpolator.png](http://upload-images.jianshu.io/upload_images/952890-068ab7741b87b5c1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-- AnticipateInterpolator
 - AnticipateOvershootInterpolator
 
 ![AnticipateOvershootInterpolator.png](http://upload-images.jianshu.io/upload_images/952890-f8e99a0f2c4b81b0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
@@ -215,42 +311,5 @@ set.start();
 ![LinearInterpolator.png](http://upload-images.jianshu.io/upload_images/952890-776023dead32791e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 - OvershootInterpolator
+
 ![OvershootInterpolator.png](http://upload-images.jianshu.io/upload_images/952890-e0f003db8e14806f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-----
-
-####其他
-**1.LayoutAnimation**
-作用于ViewGroup，子元素都会有这个动画效果。具体看APIDemo，里面的比较有代表性。
-```
-<layoutAnimation 
-    xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:animation="@anim/anim_item" 
-    android:animationOrder="normal" 
-    android:delay="0.5">
-</layoutAnimation>
-```
-在xml布局文件中指定android:layoutAnimation属性：
-```
-
-<ListView android:layout_width="match_parent"   
-    android:layout_height="wrap_content"     
-    android:background="#fff4f7f9" 
-    android:cacheColorHint="#00000000" 
-    android:divider="#dddbdb" 
-    android:dividerHeight="1.0px" 
-    android:layoutAnimation="@anim/layout_animation" 
-    android:listSelector="@android:color/transparent"/>
-```
-```
-ListView listview = (ListView) findViewById(R.id.listview);
-Animation animation = AnimationUtils.loadAnimation(TestAnimActivity.this, R.anim.anim_item);
-LayoutAnimationController controller = new LayoutAnimationController(animation);
-controller.setDelay(0.5f);
-controller.setOrder(LayoutAnimationController.ORDER_NORMAL);
-listview.setLayoutAnimation(controller);
-```
-
-**2.Activity**
-overridePendingTransition(int enterAnim, int exitAnim);
-# **在startActivity或finish之后调用才有效。**
