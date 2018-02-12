@@ -48,7 +48,7 @@
  - CONNECT ： 要求使用隧道协议链接代理（使用SSL Secure Sockets Layer 安全套接层、或 TLS Transport Layer Security 传输层安全）
 - 持久连接节省通信量
   HTTP keep-alive或connection reuse，只要任意一方没有明确提出断开连接，则保持TCP状态
-  ![http]()
+  ![http](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/NET/http%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A51.png?raw=true)
   
   
   
