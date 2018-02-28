@@ -1,0 +1,3 @@
+- [Java 8简明教程](http://www.importnew.com/10360.html)
+- [Java 8 Lambda表达式一看就会](https://juejin.im/post/5a5573e06fb9a01cbe653365)
+- [Lambda 表达式有何用处？如何使用？](https://www.zhihu.com/question/20125256)

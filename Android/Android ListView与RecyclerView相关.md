@@ -22,6 +22,8 @@
   (非常详细的文章，总结了很多在使用RecylerView时遇到的问题和解决方法)
 
 - [Android 优雅的为RecyclerView添加HeaderView和FooterView](http://blog.csdn.net/lmj623565791/article/details/51854533)
+- [Android LRecyclerView实现下拉刷新，滑动到底部自动加载更多](http://jcodecraeer.com/plus/view.php?aid=4533)
+- [Building a RecyclerView LayoutManager – Part 2](http://wiresareobsolete.com/2014/09/recyclerview-layoutmanager-2/)
 
 ###2. 为RecylerView设置ItemAnimator
 

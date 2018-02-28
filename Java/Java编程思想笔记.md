@@ -10,21 +10,35 @@
 普通内部类不能包含static数据和字段，也不嫩肤包含嵌套类，但是嵌套类可以包含这些关系
 ##12 Exception
 1.可以在catch中重新将异常抛出，那么在上一层捕获的异常的printStackTrace信息还是原来抛出点的异常信息，如果想更新这个信息，重新抛出新的异常（new）或者调用fillInStackTrace方法
+
 2.异常链
 通过`initCause`方法添加引起异常的原因
 
 3.分类
- Throwable -》1.Error（编译时和系统错误，一般不用关心）  2.Exception（可以被抛出的类型）
+ Throwable -》
  
- Exception -》 RuntimeException（不受检查异常）
+  - 1.Error（编译时和系统错误，一般不用关心）  
+  - 2.Exception（可以被抛出的类型）
+ 
+ >通常，Java的异常(包括Exception和Error)分为可查的异常（checked exceptions）和不可查的异常（unchecked exceptions）。
+  
+   - 可查异常（编译器要求必须处置的异常）：正确的程序在运行中，很容易出现的、情理可容的异常状况。可查异常虽然是异常状况，但在一定程度上它的发生是可以预计的，而且一旦发生这种异常状况，就必须采取某种方式进行处理。
+   - 不可查异常(编译器不要求强制处置的异常):包括运行时异常（RuntimeException与其子类）和错误（Error）。
+ 
+ Exception -》 
+ 
+ - RuntimeException（不受检查异常）
   1.RuntimeException 运行时异常，不用主动抛出，属于Java的标准运行时检测的一部分，RuntimeException可以不需要被捕获也可以被系统主动调用printStackTrace）
   
+ - 除了RuntimeException及其子类以外，其他的Exception类及其子类都属于可查异常。这种异常的特点是Java编译器会检查它，也就是说，当程序中可能出现这类异常，要么用try-catch语句捕获它，要么用throws子句声明抛出它，否则编译不会通过。
+   
 
-  ![](/Users/leegend/Desktop/Exception.jpg)
-  >通常，Java的异常(包括Exception和Error)分为可查的异常（checked exceptions）和不可查的异常（unchecked exceptions）。
-      可查异常（编译器要求必须处置的异常）：正确的程序在运行中，很容易出现的、情理可容的异常状况。可查异常虽然是异常状况，但在一定程度上它的发生是可以预计的，而且一旦发生这种异常状况，就必须采取某种方式进行处理。
- 除了RuntimeException及其子类以外，其他的Exception类及其子类都属于可查异常。这种异常的特点是Java编译器会检查它，也就是说，当程序中可能出现这类异常，要么用try-catch语句捕获它，要么用throws子句声明抛出它，否则编译不会通过。
-不可查异常(编译器不要求强制处置的异常):包括运行时异常（RuntimeException与其子类）和错误（Error）。
+
+  ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/JavaBCXS/Exception.jpg?raw=true)
+  
+  
+      
+
   
 4.异常缺失
   在finally中直接return不会看见异常
