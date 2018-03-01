@@ -38,6 +38,8 @@
 	- 字段的名称和描述符（Descriptor）
 	- 方法的名称和描述符![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/JVM/%E5%B8%B8%E9%87%8F%E6%B1%A0%E9%A1%B9%E7%9B%AE%E7%B1%BB%E5%9E%8B.png?raw=true)
 
+- [java -- JVM的符号引用和直接引用](https://www.cnblogs.com/shinubi/articles/6116993.html)
+
 #### 1.3 访问标志
 
 >这个标志用于识别一些类或者接口层次的访问信息，包括：这个Class是类还是接口；是否定义为public类型；是否定义为abstract类型；如果是类的话，是否被声明为final等。#### 1.4 类索引、父类索引、接口索引集合
