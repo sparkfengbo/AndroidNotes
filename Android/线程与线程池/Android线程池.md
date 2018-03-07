@@ -65,37 +65,42 @@ public static final Executor THREAD_POOL_EXECUTOR
 
 不过，Java已经为我们封装了一些线程池，在`Executors`中包含很多静态方法。
 
-- **newFixedThreadPool**
+- **1.newFixedThreadPool**
 
 ```
 public static ExecutorService newFixedThreadPool(int nThreads) {    
-        return new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<Runnable>());
+        return new ThreadPoolExecutor(nThreads, nThreads, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>());
 }
 ```
 这个方法创建了一个数量固定的线程池，并且工作队列是一个无限制大小的LinkedBlockingQueue。最大线程数量和核心线程数量相同。
 
-- **newSingleThreadExecutor**
+- **2.newSingleThreadExecutor**
 
 ```
 public static ExecutorService newSingleThreadExecutor() {    
     return new FinalizableDelegatedExecutorService(
-          new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,                                new LinkedBlockingQueue<Runnable>()));
+          new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS, new LinkedBlockingQueue<Runnable>()));
  }
 ```
 `newSingleThreadExecutor`创建一个单线程，无限制的队列。所以队列的任务都是以顺序的方式执行。
 
-- **newCachedThreadPool**
+- **3.newCachedThreadPool**
 
 适合执行大量短时间异步任务的线程池。
 
 ```
 public static ExecutorService newCachedThreadPool() {    
-      return new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,  new SynchronousQueue<Runnable>());
+      return new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
 }
 ```
 创建一个核心线程数量0，最大线程数量为Integer.MAX_VALUE的线程池，线程存活时间60s，任务队列为SynchronousQueue。
 
-- **ScheduledThreadpoolExecutor**
+>**关于SynchronousQueue**
+
+SynchronousQueue是一个阻塞队列，内部没有容量，也就是capacity是0，每一个insert操作必须等另一个线程的remove操作。对SynchronousQueue使用peek操作都会返回null,也不能使用迭代器iterate。
+
+
+- **4.newScheduledThreadPool**
 
 ```
 public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {    
@@ -111,10 +116,18 @@ public ScheduledThreadPoolExecutor(int corePoolSize, ThreadFactory threadFactory
 可以看到ScheduledThreadPoolExecutor是一个有固定数量的核心线程，最大线程数量是Integer.MAX_VALUE，如果线程执行完毕则会立即销毁。任务队列是DelayedWorkQueue。
 
 通常`ScheduledThreadPoolExecutor`会定时执行任务，例如：
+
 ```
 public ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDelay, long period, TimeUnit unit) {
 ```
 `initialDelay`是第一次执行延长的时间，`period`是执行周期的次数。
+
+> DelayedWorkQueue
+
+DelayedWorkQueue是ScheduledThreadPoolExecutor的内部类。
+
+[Java线程学习笔记（十一） DelayQueue的应用
+](http://ideasforjava.iteye.com/blog/657384)
 
 ### 3.任务队列
 
