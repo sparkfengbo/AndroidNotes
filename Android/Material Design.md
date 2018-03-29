@@ -1,1 +1,6 @@
 - [CoordinatorLayout与滚动的处理](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2015/0717/3196.html)
+- [CoordinatorLayout布局的使用方式](https://www.jianshu.com/p/97206f5973c5)
+- [android CoordinatorLayout使用](https://blog.csdn.net/xyz_lmn/article/details/48055919)
+- [一个神奇的控件——Android CoordinatorLayout与Behavior使用指南](https://www.jianshu.com/p/488283f74e69)
+- [CoordinatorLayout 自定义Behavior并不难，由简到难手把手带你撸三款！](http://www.jcodecraeer.com/a/anzhuokaifa/androidkaifa/2016/0824/6565.html)
+- [Android 优化交互 —— CoordinatorLayout 与 Behavior](https://segmentfault.com/a/1190000005024216)

@@ -259,7 +259,7 @@ Client进程和Server进程的一次通信涉及四种类型对象，分别是
 
 可参考文章
 
-- [Android Bander设计与实现 - 设计篇](http://blog.csdn.net/universus/article/details/6211589)
+- [Android Binder设计与实现 - 设计篇](http://blog.csdn.net/universus/article/details/6211589)
 - *源码分析请参考《罗升阳 Android源代码情景分析》 第5章*
 
 
