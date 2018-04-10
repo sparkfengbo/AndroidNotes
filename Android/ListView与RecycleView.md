@@ -1,0 +1,2 @@
+- [Android ListView工作原理完全解析，带你从源码的角度彻底理解](https://blog.csdn.net/guolin_blog/article/details/44996879)
+- [Android中的缓存艺术，对比RecyclerView与ListView的缓存机制](https://mp.weixin.qq.com/s/LAm4m9klItuQpr4Sd2_mvQ)

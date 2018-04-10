@@ -85,4 +85,8 @@
 	- [自定义View Draw过程](https://www.jianshu.com/p/95afeb7c8335)
 	- [教你步步为营掌握自定义ViewGroup](https://www.jianshu.com/p/5e61b6af4e4c)
 
-	
+
+	- [深入理解View知识系列一- setContentView和LayoutInflater源码原理分析](https://blog.csdn.net/yulong0809/article/details/79277574)
+	- [深入理解View知识系列二- View底层工作原理以及View的绘制流程](https://blog.csdn.net/yulong0809/article/details/79277594)
+	- [深入理解View知识系列三-Window机制、Canvas的由来、Android事件的由来](https://blog.csdn.net/yulong0809/article/details/79277633)
+	- [https://blog.csdn.net/yulong0809/article/details/79277667](深入理解View知识系列四-View的测量规则以及三大方法流程)
