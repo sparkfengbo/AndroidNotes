@@ -10,6 +10,8 @@
 
 -------
 
+**主要内容**
+
 
 - Http 简介
 - Http 状态码分类
@@ -22,13 +24,13 @@
 ##### 1.1 TCP/IP分层
 
 - 应用层
- - 像用户提供应用服务的协议。FTP、DNS、HTTP
+   - 像用户提供应用服务的协议。FTP、DNS、HTTP
 - 传输层
- - 提供网络连接中两台计算机之间数据的传输。TCP、UDP
+   - 提供网络连接中两台计算机之间数据的传输。TCP、UDP
 - 网络层
- - 处理网络上流动的**数据包**。该层规定了通过怎样的路径到达对方计算机。。
+   - 处理网络上流动的**数据包**。该层规定了通过怎样的路径到达对方计算机。。
 - 数据链路层
- - 处理网络硬件部分，包括操作系统、设备驱动、光纤等。
+   - 处理网络硬件部分，包括操作系统、设备驱动、光纤等。
 
 ##### 1.2 URI、URL
 
@@ -38,14 +40,14 @@
 
 - HTTP不保存状态（可通过Cookie保存）
 - HTTP方法
- - GET ： 获取资源
- - POST ： 传输实体主体
- - PUT ： 传输文件
- - HEAD ： 获得报文首部
- - DELETE ： 删除文件
- - OPTIONS ： 询问支持的方法
- - TRACE ： 追踪路径
- - CONNECT ： 要求使用隧道协议链接代理（使用SSL Secure Sockets Layer 安全套接层、或 TLS Transport Layer Security 传输层安全）
+   - GET ： 获取资源
+   - POST ： 传输实体主体
+   - PUT ： 传输文件
+   - HEAD ： 获得报文首部
+   - DELETE ： 删除文件
+   - OPTIONS ： 询问支持的方法
+   - TRACE ： 追踪路径
+   - CONNECT ： 要求使用隧道协议链接代理（使用SSL Secure Sockets Layer 安全套接层、或 TLS Transport Layer Security 传输层安全）
 - 持久连接节省通信量
   HTTP keep-alive或connection reuse，只要任意一方没有明确提出断开连接，则保持TCP状态
   ![http](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/NET/http%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A51.png?raw=true)
@@ -100,7 +102,7 @@
 
 HTTP加入加密处理和认证等机制，就是HTTPS（HTTP Secure）
 
-![图]()
+![Https](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/NET/https.png?raw=true)
 
 增加了SSL或TLS协议代替，HTTP直接和TCP通信时，使用SSL先演变成先和SSL通信，再由SSL和TCP通信。
 
@@ -115,11 +117,11 @@ HTTPS使用对称加密和非对称加密的混合加密机制。在交换密钥
 
 Google 2010发布，开发目标旨在解决HTTP性能瓶颈，缩短Web页面加载时间
 
-HTTP瓶颈
+**HTTP瓶颈**
 
 - 一条连接上只能发送一个请求
 - 请求只能从客户端开发，客户端不能接收除响应外的指令
-- 请求、响应首部未经压缩就发送。首部信息越多延迟越发
+- 请求、响应首部未经压缩就发送。首部信息越多延迟越长
 - 发送冗长的首部。每次互相发送相同的首部造成的浪费较多
 - 可任意选择数据压缩格式。非强制压缩发送
 
@@ -138,7 +140,7 @@ SPDY没有改写HTTP协议，而是在TCP/IP的应用层与会传输层之间通
 
 #### 4.Web攻击技术简介
 
-1.中间人攻击 ![中间人攻击.png]()
+1.中间人攻击 ![中间人攻击.png](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/NET/%E4%B8%AD%E9%97%B4%E4%BA%BA%E6%94%BB%E5%87%BB.png?raw=true)
 
 2.跨站脚本攻击 XSS（Cross-Site Scripting）
 
@@ -180,7 +182,7 @@ Clickjacking，利用透明按钮或链接做成陷阱，诱使用户点击。
 
 13.DoS攻击
 
-Denial of Service attack。让运行中的五福呈停止状态的攻击，有时也叫做服务停止攻击或拒绝服务攻击。Dos不限于Web网站，还包含网络设备和服务器等。
+Denial of Service attack。让运行中的服务器停止状态的攻击，有时也叫做服务停止攻击或拒绝服务攻击。Dos不限于Web网站，还包含网络设备和服务器等。
 
 - 其中利用访问请求造成资源过载
 - 通过攻击安全漏洞使服务停止
