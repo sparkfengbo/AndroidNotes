@@ -1,8 +1,8 @@
-- [SSL与TLS的区别以及介绍](https://kb.cnblogs.com/page/197396/)
+- 摘自 [SSL与TLS的区别以及介绍](https://kb.cnblogs.com/page/197396/)
 
 
 
- ![TSL握手过程]()
+ ![TSL握手过程](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/NET/TSL%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B.png?raw=true)
 
 >关系就是。。。。并列关系
 
