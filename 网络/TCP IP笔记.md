@@ -18,13 +18,14 @@
 - TELNET （使用TCP）常用语用于远程登录
 - FTP 相邻两台计算机进行文件传输 TCP **21号端口**
 - SMTP 电子邮件 TCP **25号端口**
-
- - IMAP 接收电子邮件的协议
- - POP
+- IMAP 接收电子邮件的协议
+- POP POP的全称是 Post Office Protocol，即邮局协议，用于电子邮件的接收，它使用TCP的110端口。现在常用的是第三版 ，所以简称为 POP3。
 
 - HTTP
 - DNS 实现网络设备名字到IP地址映射的网络服务
 - SNMP 用于管理与监视网络设备
+
+[POP3, SMTP, IMAP 和 Exchange 的区别在哪里？](https://www.zhihu.com/question/24605584)
 
 ##### 6.表示层
 
@@ -97,13 +98,26 @@
 
 ![TCP三次握手与四次挥手](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/NET/http%E6%8C%81%E4%B9%85%E8%BF%9E%E6%8E%A51.png?raw=true)
 
+
+
+>在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。 
+
+>- 第一次握手：建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认； 
+
+>- 第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态； 
+
+>- 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。 
+
+
 **2.超时重发**
 
 **3.利用窗口控制提高速度**
 
 **4.拥塞控制**
 
---
+
+-------
+
 
 
 - [关于TCP/IP，必知必会的十个问题](https://mp.weixin.qq.com/s/qn5fw8yHvjBou6Ps2Xo9Lw)
@@ -113,13 +127,6 @@
 
 - [TCP三次握手与DDOS攻击原理](https://www.cnblogs.com/howhy/p/6382432.html)
 
->在TCP/IP协议中，TCP协议提供可靠的连接服务，采用三次握手建立一个连接。 
-
->- 第一次握手：建立连接时，客户端发送syn包(syn=j)到服务器，并进入SYN_SEND状态，等待服务器确认； 
-
->- 第二次握手：服务器收到syn包，必须确认客户的SYN（ack=j+1），同时自己也发送一个SYN包（syn=k），即SYN+ACK包，此时服务器进入SYN_RECV状态； 
-
->- 第三次握手：客户端收到服务器的SYN＋ACK包，向服务器发送确认包ACK(ack=k+1)，此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成三次握手。 
 
 **重要概念**
 
