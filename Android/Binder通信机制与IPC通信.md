@@ -115,23 +115,25 @@ Linux提供的IPC机制有
 
 #### 5.4.1 需要注意的是
 
-**1.**当客户端发起远程请求时，客户端线程被挂起，直至服务端进程返回数据，而服务端被调用的方法运行在服务端的Binder线程池中。所以如果一个远程方法很耗时，那么不能在UI线层发起远程调用。 
+**1.** 当客户端发起远程请求时，客户端线程被挂起，直至服务端进程返回数据，而服务端被调用的方法运行在服务端的Binder线程池中。所以如果一个远程方法很耗时，那么不能在UI线层发起远程调用。 
 
 **另外，由于服务端的方法运行在Binder线程池中，切记不要在服务端方法中开异步线程。**处理客户端的回调方法也是同样的道理（Server的远程方法运行在Server的Binder线程池中，客户端的被Server调用的回调方法运行在客户端的Binder线程池中）（RemoteCallback相关的代码）。
 
-**2.**由于服务端的Binder方法运行在Binder线程池中，所以Binder方法不管是否耗时都应该采用同步的方法去实现，因为它已经运行在一个线程中了。
+**2.** 由于服务端的Binder方法运行在Binder线程池中，所以Binder方法不管是否耗时都应该采用同步的方法去实现，因为它已经运行在一个线程中了。
 
-**3.**AIDL中不是所有数据类型都可以使用，能够使用的数据类型有：`基本数据类型`、`String、CharSequence`、`ArrayList`、`HashMap`、`Parcelable`（必须显式的import进来，如果用到自定义的Parcelable则必须新建同名的aidl文件，并声明类型）、`AIDL`。
+**3.** AIDL中不是所有数据类型都可以使用，能够使用的数据类型有：`基本数据类型`、`String、CharSequence`、`ArrayList`、`HashMap`、`Parcelable`（必须显式的import进来，如果用到自定义的Parcelable则必须新建同名的aidl文件，并声明类型）、`AIDL`。
 
 Parcelable（必须显式的import进来，如果用到自定义的Parcelable则必须新建同名的aidl文件，并声明类型）这里可以参考 [AndroidCodeDemoTest](https://github.com/sparkfengbo/AndroidCodeDemoTest)
 
 AIDL中除了基本类型，其他类型必须标上in、out、inout（不能随便使用，因为在底层实现中有开销）
 
-**4.**AIDL接口中只支持方法，不支持静态变量
+**4.** AIDL接口中只支持方法，不支持静态变量
 
-**5.**AIDL的包结构在服务端和客户端中必须保持一致，因为客户端需要反序列化服务端中和AIDL接口相关的所有类。建议把AIDL相关的类和文件全部放在同一个包中
-**6.**Server可以连接很多个Client
-**7.**Server的远程方法运行在Server的Binder线程池中，客户端的被Server调用的回调方法运行在客户端的Binder线程池中。
+**5.** AIDL的包结构在服务端和客户端中必须保持一致，因为客户端需要反序列化服务端中和AIDL接口相关的所有类。建议把AIDL相关的类和文件全部放在同一个包中
+
+**6.** Server可以连接很多个Client
+
+**7.** Server的远程方法运行在Server的Binder线程池中，客户端的被Server调用的回调方法运行在客户端的Binder线程池中。
 
 >为什么可以使用CopyOnWriteArrayList和ConcurrentHashMap？AIDL中支持ArrayList和HashMap，但是AIDL所支持的是List接口，虽然服务端返回的是CopyOnWriteArrayList，但是Binder中会按照List的规范访问数据并最终形成一个ArrayList传递给客户端。
 
