@@ -5,15 +5,14 @@
 
 - [Retrofit Github](https://github.com/square/retrofit)
 
-- [深入浅出 Retrofit，这么牛逼的框架你们还不来看看？](https://segmentfault.com/a/1190000005638577)
- - 文中介绍了Retrofit的使用、Retrofit的原理和Retrofit的小技巧和进阶使用，使得细读。
+- [深入浅出 Retrofit，这么牛逼的框架你们还不来看看？](https://segmentfault.com/a/1190000005638577)(文中介绍了Retrofit的使用、Retrofit的原理和Retrofit的小技巧和进阶使用，使得细读)
 - [Android：Retrofit 与 RxJava联合使用大合集（含实例教程）！](http://blog.csdn.net/carson_ho/article/details/79125101)
 - [这是一份很详细的 Retrofit 2.0 使用教程（含实例讲解）](http://blog.csdn.net/carson_ho/article/details/73732076)
 
 
 --------
 
-**如何使用的最简单的例子**
+**如何使用的最简单的例子(摘自参考文章)**
 
 举个最简单的例子
 
@@ -26,7 +25,7 @@ public interface GitHubService {
 }
 ```
 
-Url是https://api.github.com/users/{user}/repos
+Url 是 https://api.github.com/users/{user}/repos
 
 ```
 Retrofit retrofit = new Retrofit.Builder()
