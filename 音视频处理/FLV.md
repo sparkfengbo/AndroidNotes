@@ -183,7 +183,7 @@ AVC sequence header
 文件中AVCsequenceheader只有一个，出现在第一个video tag。为了能够从FLV文件中获取NALU，必须要知道前面的NALU长度字段所占的字节数（通常是1、2或4个字节），这个内容必须要从AVCDecoderConfigurationRecord中获取，这个遵从标准[ISO/IEC 14496-15中的5.2.4小节](http://read.pudn.com/downloads174/sourcecode/multimedia/mpeg/810862/ISO_IEC_14496-15-2004.pdf)。
 
 AVCDecoderConfigurationRecord结构如下：
-![](/Users/leegend/Desktop/tmppic/19b92a7de3228844cc1601accceb61bb.png)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/AVCDecoderConfigurationRecord.png?raw=true)
 
 其中：
 
