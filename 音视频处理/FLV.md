@@ -130,7 +130,7 @@ https://wiki.multimedia.cx/index.php/MPEG-4_Audio#Audio_Object_Types)。
 
 举例来讲：
 
-![](/Users/leegend/Desktop/tmppic/20160429094448.png)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/flvcase.png?raw=true)
 
 FLV文件开头是FLV的头部，然后是MetaData元信息，上例中紧接着是一个AudioTag，这个AudioTag，由0x000004A1的地址可知，红框中的内容是AUDIODATA，第一个字节0xAF对应AUDIODATA表格，A的十进制是10，对应AAC，F对应二进制是1111，前两位代表采样频率，对应3即44kHz，第三和第四位分别代表SoundSize和SoundType。
 
@@ -141,20 +141,20 @@ FLV文件开头是FLV的头部，然后是MetaData元信息，上例中紧接着
 
 GASpecificConfig的语义如下：
 
-![GASpecificConfig](/Users/leegend/Desktop/tmppic/196b2fe11f9f94536b2f6accbe3ad247.png)
+![GASpecificConfig](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/gasc.png?raw=true)
 
 0x88 的后三位均为0，所以GASpecificConfig的frameLengthFlag=0，dependsOnCoreCoder=0，extensionFlag=0，0x88表示的内容到GASpecificConfig就结束了。那么56 E5 A5 48 80代表什么呢？我还没有想明白
-
 
 - AudioSpecifgConfig的语义可参考[ISO_IEC_14496-3 subpart1.pdf](http://read.pudn.com/downloads98/doc/comm/401153/14496/ISO_IEC_14496-3%20Part%203%20Audio/C036083E_SUB1.PDF)
 
 - GASpecificConfig的语义可参考[ISO_IEC_14496-3 subpart4.pdf](http://read.pudn.com/downloads98/doc/comm/401153/14496/ISO_IEC_14496-3%20Part%203%20Audio/C036083E_SUB4.PDF)
 
 
-
 ### 2.5 Video tags
 
 #### 2.5.1 VIDEODATA
+
+当tag的TagType = 9时，Data里面是VIDEODATA。
 
 ![](/Users/leegend/Desktop/tmppic/d1de72173b1b7555d2d0a8ce9c3f7a23.png)
 
@@ -162,7 +162,6 @@ GASpecificConfig的语义如下：
 - 5-8b：CodecID（4bit）7是AVC
 - 7-7b：采样的大小（1bit）（每个采样的大小，属于未压缩的格式，0位8bit采样，1位16bit采样）
 - 8-xb：当CodecID是7时，表示AVCVIDEOPACKET
-
 
 
 #### 2.5.2 AVCVIDEOPACKET
@@ -178,6 +177,7 @@ GASpecificConfig的语义如下：
 >关于CTS：这是一个比较难以理解的概念，需要和pts，dts配合一起理解。 首先，pts（presentation time stamps），dts(decoder timestamps)，cts(CompositionTime)的概 念： pts：显示时间，也就是接收方在显示器显示这帧的时间。单位为1/90000 秒。 dts：解码时间，也就是rtp包中传输的时间戳，表明解码的顺序。单位单位为1/90000 秒。——根据 后面的理解，pts就是标准中的CompositionTime cts偏移：cts = (pts ­ dts) / 90 。cts的单位是毫秒。 pts和dts的时间不一样，应该只出现在含有B帧的情况下，也就是profile main以上。baseline是没有 这个问题的，baseline的pts和dts一直想吐，所以cts一直为0。 在flv tag中的时戳就是DTS。 研究 一下文档，  ISO/IEC 14496­12:2005(E)      8.15   Time to Sample Boxes，发现 CompositionTime就是presentation time stamps，只是叫法不同。——需要再进一步确认。 在上图中，cp就是pts，显示时间。DT是解码时间，rtp的时戳。 I1是第一个帧，B2是第二个，后面的序号就是摄像头输出的顺序。决定了显示的顺序。 DT，是编码的顺序，特别是在有B帧的情况，P4要在第二个解，因为B2和B3依赖于P4，但是P4的 显示要在B3之后，因为他的顺序靠后。这样就存在显示时间CT(PTS)和解码时间DT的差，就有了CT 偏移。 P4解码时间是10，但是显示时间是40，
 
 #### 2.5.3 AVCDecoderConfigurationRecord
+
 AVC sequence header
 
 文件中AVCsequenceheader只有一个，出现在第一个video tag。为了能够从FLV文件中获取NALU，必须要知道前面的NALU长度字段所占的字节数（通常是1、2或4个字节），这个内容必须要从AVCDecoderConfigurationRecord中获取，这个遵从标准[ISO/IEC 14496-15中的5.2.4小节](http://read.pudn.com/downloads174/sourcecode/multimedia/mpeg/810862/ISO_IEC_14496-15-2004.pdf)。
@@ -197,6 +197,7 @@ AVCDecoderConfigurationRecord结构如下：
 - pictureParameterSetLength;   //pps长度     
 
 lengthSizeMinusOne加1就是NALU长度字段所占字节数
+
 ![](/Users/leegend/Desktop/tmppic/59fe440be33f9dec94c61eba586fa27e.png)
 
 
@@ -238,7 +239,7 @@ lengthSizeMinusOne加1就是NALU长度字段所占字节数
 ---------
      
 参考：
-
+- [video_file_format_spec_v10.pdf](http://jchblog.u.qiniudn.com/doc/video_file_format_spec_v10.pdf)
 - [FLV细节解析](https://wenku.baidu.com/view/cfb74db08bd63186bcebbced.html)
 - [FLV文件格式官方规范详解
 ](http://www.360doc.com/content/16/0624/22/9075092_570514283.shtml)
