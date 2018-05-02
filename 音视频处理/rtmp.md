@@ -18,9 +18,8 @@ RTMP协议有多种**变种**：
  
 - 握手开始于客户端发送C0，C1块。- 在发送C2之前客户端必须等待接收S1 。- 在发送任何数据之前客户端必须等待接收S2。       - 服务端在发送S0和S1之前必须等待接收C0，也可以等待接收C1。- 服务端在发送S2之前必须等待接收C1。- 服务端在发送任何数据之前必须等待接收C2。
  
- 
-  TODO
- ![握手](/Users/leegend/Desktop/tmppic/图片2.png)
+
+ ![握手](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/RTMP-HandShake.png?raw=true)
  
  具体握手过程的数据格式请参考RTMP文档。
  
@@ -50,10 +49,9 @@ RTMP消息（Message）分**头**和**负载**两部分。
 **消息头**包含下面的内容：
 - 消息类型：一个字节字段用于表示消息类型。范围在1-7内的消息ID用于协议控制消息。- 负载长度：三个字节字段用于表示负载的字节数。设置为big-endian格式。**消息负载**是消息中包含的真实数据。例如，它可以是音频样本或压缩的视频数据。- 时间戳：四字节字段，包含消息的时间戳（**不一定是当前时间**）。4个字节用big-endian方式打包。- 消息流ID：三字节字段标识消息流。这些字节设置为小字节序。
 
-TODO
- ![](/Users/leegend/Desktop/tmppic/图片2.png)
-
 共11字节。
+
+ ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/message.jpeg?raw=true)
 
 
 RTMP保留消息类型ID 
@@ -77,14 +75,15 @@ ID为1和2用于RTMP块流协议。ID在3-6之内用于RTMP本身。ID 7的消�
 
 #### 3.3.1 Chunk总体结构
 
-TODO
- ![](/Users/leegend/Desktop/tmppic/图片3.png)
+
+ ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-format.png?raw=true)
 
 - 块基本头：1到3 字节本字段包含块流ID和块类型。块类型决定编码的消息头的格式。长度取决于块流ID。块流ID是可变长字段。- 块消息头：0，3，7或11字节。    本字段编码要发送的消息的信息。本字段的长度，取决于块头中指定的块类型。- 扩展时间戳：0个或4字节本字段必须在发送普通时间戳（普通时间戳是指块消息头中的时间戳）设置为0xffffff时发送，正常时间戳为其他值时都不应发送本值。当普通时间戳的值小于0xffffff时，本字段不用出现，而应当使用正常时间戳字段。  #### 3.3.2 组成1 - Basic Header
 
-   块基本头包含**块流ID（Chunk Stream ID**和**块类型（Chunk Type）**（在下图中用fmt表示）。
+   块基本头包含**块流ID（Chunk Stream ID）**和**块类型（Chunk Type）**（在下图中用fmt表示）。
    
-   **Chunk Type**决定**Chunk Msg Header**的格式。
+   **Chunk Type**决定**Chunk Msg Header**的格式。**Chunk Type**长度固定为2位，因此CSID的长度是（6=8-2）、（14=16-2）、（22=24-2）中的一个。
+
 
    **长度：**块基本头字段可能是1，2或3个字节。这取决于**块流ID（Chunk Stream ID）**。本协议支持65597种流，ID从**3-65599**。
 ID 0、1、2作为保留。
@@ -93,21 +92,25 @@ ID 0、1、2作为保留。
 - 1，代表Basic Header占用3字节，表示ID范围是64-65599（第三个字节*256+第二个字节+64）；
 - 2，表示低层协议消息。没有其他的字节来表示流ID。
 
-**Chunk Type**长度固定为2位，因此CSID的长度是（6=8-2）、（14=16-2）、（22=24-2）中的一个。
 
 - 3-63表示完整的流ID。3-63之间的值表示完整的流ID。没有其他的字节表示流ID。
  
-##### **1字节**
- ![](/Users/leegend/Desktop/tmppic/图片4.png)
+  **1字节**
+
+ ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-basicheader1.png?raw=true)
  当Basic Header为1个字节时，CSID占6位，6位最多可以表示64个数，因此这种情况下CSID在［0，63］之间，其中用户可自定义的范围为［3，63］。
  
  
-#####  **2字节**
+  **2字节**
  ![](/Users/leegend/Desktop/tmppic/图片5.png)
  当Basic Header为2个字节时，CSID占14位，此时协议将与chunk type所在字节的其他位都置为0，剩下的一个字节来表示CSID－64，这样共有8个二进制位来存储CSID，8位可以表示［0，255］共256个数，因此这种情况下CSID在［64，319］，其中319=255+64。
-#####  **3字节**
-![](/Users/leegend/Desktop/tmppic/图片6.png)
+ 
+  **3字节**
+
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-basicheader2.png?raw=true)
+
 当Basic Header为3个字节时，CSID占22位，此时协议将［2，8］字节置为1，余下的16个字节表示CSID－64，这样共有16个位来存储CSID，16位可以表示［0，65535］共65536个数，因此这种情况下CSID在［64，65599］，其中65599=65535+64，需要注意的是，Basic Header是采用小端存储的方式，越往f后的字节数量级越高，因此通过这3个字节每一位的值来计算CSID时，应该是:<第三个字节的值>x256+<第二个字节的值>+64
+
 
 #### 3.3.3 组成2 - Chunk Msg Header
 
@@ -162,7 +165,7 @@ Chunk Message Header的格式和长度取决于Basic Header的chunk type，共�
 
  
 参考
-
+- [RTMP协议](http://mufool.com/2017/11/30/rtmp/)
 - [维基百科](https://en.wikipedia.org/wiki/Real-Time_Messaging_Protocol#Packet_structure)
 - [带你吃透RTMP](http://mingyangshang.github.io/2016/03/06/RTMP%E5%8D%8F%E8%AE%AE/)
 - [rtmp 协议规范 中文版](http://download.csdn.net/download/leixiaohua1020/6563059)
