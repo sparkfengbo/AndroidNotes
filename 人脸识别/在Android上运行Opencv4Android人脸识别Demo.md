@@ -1,5 +1,6 @@
 在官网[下载](http://opencv.org/releases.html)对应的Android SDK，发现里面有如下的结构
-![](http://upload-images.jianshu.io/upload_images/952890-9d969c48d29e5e60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/ai/facede2.png?raw=true)
 
 - apk文件夹
   apk文件夹下包含了各平台的OpenCVManager.apk，sample里的apk安装后需要OpenCVManager.apk才能运行。因为sample里的apk依赖OpenCVManager.apk里的libopencv_java3.so文件。我在HTC one手机上尝试多次都不成功。
@@ -11,14 +12,15 @@
 
 下面是导入sample源码，通过ndk编译cpp代码生成so，而不依赖OpenCVManager.apk。
 
-##环境
+## 环境
 OS：mac
 IDE：Android Studio
 SDK：o4a 3.2.0
 
-##步骤
+## 步骤
 在AS中import project，选择人脸识别的demo（face-detection）。AS会自动将依赖的OpencvSDK导入到工程中，结构如下。
-![](http://upload-images.jianshu.io/upload_images/952890-ae8a0bc8a40b5ec7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/ai/facedetection.png?raw=true)
 
 此时直接编译会报出很多错误，包括类似这样的错误：
 
