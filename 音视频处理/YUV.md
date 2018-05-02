@@ -6,7 +6,7 @@
 
 **RGB**大家都了解，是通过三原色的组合产生各种颜色，RGB也有很多格式，比如`RGB24`、`RGB32`，分别表示R、G、B分别占用24位、32位，所以他们每帧的图片分辨占用 `w * h * 3 bytes、w * h * 4 `bytes
 
-**[YIQ](https://baike.baidu.com/item/YIQ/1977357?fr=aladdin)**是NTSC电视系统标准，美国的标准。Y提供黑白电视及彩色电视的亮度信号，I和Q两个分量携带颜色信息，指的是色调，用来描述色彩和饱和度的属性。初学者看到Y表示亮度时可能会有一种误解，这里的亮度和我们平时使用手机设置的屏幕亮度是不一样的，Y的亮度可以说是图像的灰度值，灰度值不同于黑白，可以表示黑色和白色之间的各种颜色深度，类似这样。
+[YIQ](https://baike.baidu.com/item/YIQ/1977357?fr=aladdin)是NTSC电视系统标准，美国的标准。Y提供黑白电视及彩色电视的亮度信号，I和Q两个分量携带颜色信息，指的是色调，用来描述色彩和饱和度的属性。初学者看到Y表示亮度时可能会有一种误解，这里的亮度和我们平时使用手机设置的屏幕亮度是不一样的，Y的亮度可以说是图像的灰度值，灰度值不同于黑白，可以表示黑色和白色之间的各种颜色深度，类似这样。
 
 ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/YUV1.jpeg?raw=true)
 
@@ -46,6 +46,7 @@ YUYV为YUV422采样的存储格式中的一种，相邻的两个Y共用其相邻
 YV12，YU12格式（属于YUV420）是一种Plane模式。
 
 ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/yuv3.png?raw=true)
+
 将Y、U、V分量分别打包，依次存储。其每一个像素点的YUV数据提取遵循YUV420格式的提取方式，即4个Y分量共用一组UV。注意，上图中，Y'00、Y'01、Y'10、Y'11共用Cr00、Cb00，其他依次类推。
 
 
@@ -55,6 +56,7 @@ YV12，YU12格式（属于YUV420）是一种Plane模式。
 
 NV12和NV21属于YUV420格式，是一种two-plane模式，即Y和UV分为两个Plane，但是UV（CbCr）为交错存储，而不是分为三个plane。其提取方式与上一种类似，即Y'00、Y'01、Y'10、Y'11共用Cr00、Cb00。
 
+###  NV12、YV12的区别
 
 ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/yuv5.png?raw=true)
 
