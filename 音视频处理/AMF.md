@@ -38,7 +38,8 @@ AMF self-contained packet
 - Null types only contain their type-definition (0x05)
 - Numbers are encoded as double-precision floating point and are composed of eight bytes.
 
-举例：
+## 举例
+
 ```
 var person:Object = {name:'Mike', age:'30', alias:'Mike'};
 var stream:ByteArray = new ByteArray();
