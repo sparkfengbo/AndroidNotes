@@ -1,12 +1,14 @@
-#FLV格式
+# FLV格式
 
-##1.背景
+## 1.背景
+
 关于FLV的背景和历史，可以参考[维基百科页面](https://zh.wikipedia.org/wiki/Flash_Video)和[百度百科](https://baike.baidu.com/item/flv/6623513?fr=aladdin)页面。
 
 FLV是被众多新一代视频分享网站所采用，是目前增长最快、最为广泛的视频传播格式。是在sorenson公司的压缩算法的基础上开发出来的。后来被Adobe接管。现在有FLV的变种，F4V，支持H264格式。
 
 
-##2.格式
+## 2.格式
+
 FLV的格式相对其他格式来讲已经很简单了，[官方文档](http://www.adobe.com/content/dam/Adobe/en/devnet/flv/pdfs/video_file_format_spec_v10.pdf)对FLV的介绍篇幅很短。
 
 总体上讲，FLV文件构成如下
@@ -240,11 +242,12 @@ videokeyframe_frequency
 ---------
      
 参考：
-https://wenku.baidu.com/view/cfb74db08bd63186bcebbced.html
-http://www.360doc.com/content/16/0624/22/9075092_570514283.shtml
-http://niulei20012001.blog.163.com/blog/static/7514721120130694144813/
-http://blog.jianchihu.net/flv-aac-add-adtsheader.html
-http://www.lukas.cl/lukas_eng/site/artic/20150723/asocfile/20150723184649/aacdecoder.pdf
-http://blog.jianchihu.net/flv-aac-add-adtsheader.html
-http://read.pudn.com/downloads176/sourcecode/windows/multimedia/817042/14496-10.pdf
-http://read.pudn.com/downloads174/sourcecode/multimedia/mpeg/810862/ISO_IEC_14496-15-2004.pdf
+
+- https://wenku.baidu.com/view/cfb74db08bd63186bcebbced.html
+- http://www.360doc.com/content/16/0624/22/9075092_570514283.shtml
+- http://niulei20012001.blog.163.com/blog/static/7514721120130694144813/
+- http://blog.jianchihu.net/flv-aac-add-adtsheader.html
+- http://www.lukas.cl/lukas_eng/site/artic/20150723/asocfile/20150723184649/aacdecoder.pdf
+- http://blog.jianchihu.net/flv-aac-add-adtsheader.html
+- http://read.pudn.com/downloads176/sourcecode/windows/multimedia/817042/14496-10.pdf
+- http://read.pudn.com/downloads174/sourcecode/multimedia/mpeg/810862/ISO_IEC_14496-15-2004.pdf

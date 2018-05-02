@@ -1,17 +1,18 @@
-AMF
+## AMF
 
 AMF是一个二进制格式，用来序列化对象图（object graph），例如 [ActionScript](https://en.wikipedia.org/wiki/ActionScript)对象、XML，或者用来在AdobeFlash客户端和远程服务之间传递消息。
 
-AMF通常用来在RTMP发送媒体流时建立连接和发送控制命令。
+**AMF通常用来在RTMP发送媒体流时建立连接和发送控制命令。**
 
 AMF self-contained packet
 参考：
 [Action Message Format](https://en.wikipedia.org/wiki/Action_Message_Format)
 
 
-AMF0
+## AMF0
 
 这个格式制定了多种数据类型用来编码数据。
+
  Adobe states that AMF is mainly used to represent object graphs that include named properties in the form of key-value pairs, where the keys are encoded as strings and the values can be of any data type such as strings or numbers as well as arrays and other objects. XML is supported as a native type. Each type is denoted by a single byte preceding the actual data. The values of that byte are as below (for AMF0):
  
 - Number - 0x00 (Encoded as IEEE 64-bit double-precision floating point number)
