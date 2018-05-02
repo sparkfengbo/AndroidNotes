@@ -11,8 +11,7 @@
 参考知乎的问题，AAC的音频文件格式常用的有以下两种：
 - ADIF
 
- Audio Data Interchange Format 音频数据交换格式。这种格式的特征是可以确定的找到这个音频数据的开始，不需进行在音频数据流中间开始的解码，即它的解码必须在明确定义的开始处进行。故这种格式常用在磁盘文件中。
- 
+  Audio Data Interchange Format 音频数据交换格式。这种格式的特征是可以确定的找到这个音频数据的开始，不需进行在音频数据流中间开始的解码，即它的解码必须在明确定义的开始处进行。故这种格式常用在磁盘文件中。
 ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/aac1.png?raw=true)
 - ADTS
 
