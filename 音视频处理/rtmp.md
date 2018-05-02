@@ -95,19 +95,21 @@ ID 0、1、2作为保留。
 
 - 3-63表示完整的流ID。3-63之间的值表示完整的流ID。没有其他的字节表示流ID。
  
-  **1字节**
+**1字节**
 
- ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-basicheader1.png?raw=true)
+ ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/bh1.jpg?raw=true)
+ 
  当Basic Header为1个字节时，CSID占6位，6位最多可以表示64个数，因此这种情况下CSID在［0，63］之间，其中用户可自定义的范围为［3，63］。
  
  
-  **2字节**
- ![](/Users/leegend/Desktop/tmppic/图片5.png)
+**2字节**
+  
+ ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/bh2.jpg?raw=true)
  当Basic Header为2个字节时，CSID占14位，此时协议将与chunk type所在字节的其他位都置为0，剩下的一个字节来表示CSID－64，这样共有8个二进制位来存储CSID，8位可以表示［0，255］共256个数，因此这种情况下CSID在［64，319］，其中319=255+64。
  
-  **3字节**
+**3字节**
 
-![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-basicheader2.png?raw=true)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/bh3.jpg?raw=true)
 
 当Basic Header为3个字节时，CSID占22位，此时协议将［2，8］字节置为1，余下的16个字节表示CSID－64，这样共有16个位来存储CSID，16位可以表示［0，65535］共65536个数，因此这种情况下CSID在［64，65599］，其中65599=65535+64，需要注意的是，Basic Header是采用小端存储的方式，越往f后的字节数量级越高，因此通过这3个字节每一位的值来计算CSID时，应该是:<第三个字节的值>x256+<第二个字节的值>+64
 
@@ -119,9 +121,11 @@ ID 0、1、2作为保留。
 Chunk Message Header的格式和长度取决于Basic Header的chunk type，共有4种不同的格式，由上面所提到的Basic Header中的fmt字段控制。
 
 其中第一种格式可以表示其他三种表示的所有数据，但由于其他三种格式是基于对之前chunk的差量化的表示，因此可以更简洁地表示相同的数据，实际使用的时候还是应该采用尽量少的字节表示相同意义的数据。以下按照字节数从多到少的顺序分别介绍这4种格式的Message Header。
+ 
+**类型0**
 
-#####  **类型0**
-![](/Users/leegend/Desktop/tmppic/图片7.png)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-messageheader0.png?raw=true)
+
 0类型的块长度为**11**字节。在一个块流的开始和时间戳返回（即值与上一个chunk相比减小，通常在回退播放的时候会出现这种情况）的时候必须有这种块。
 
 - 1.时间戳：3字节       对于0类型的块。消息的绝对时间戳在这里发送。如果时间戳大于或等于16777215（16进制0x00ffffff），该值必须为16777215，并且扩展时间戳必须出现。否则该值就是整个的时间戳。
@@ -129,20 +133,23 @@ Chunk Message Header的格式和长度取决于Basic Header的chunk type，共�
 - 3.message type id(消息的类型id)：占用1个字节，表示实际发送的数据的类型，如8代表音频数据、9代表视频数据。
 - 4.msg stream id（消息的流id）：占用4个字节，表示该chunk所在的流的ID，和Basic Header的CSID一样，它采用小端存储的方式，
 
-#####  **类型1**
-![](/Users/leegend/Desktop/tmppic/图片8.png)
+
+**类型1**
+
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-messageheader1.png?raw=true)
 
 类型1的块占**7**个字节长，省去了表示msg stream id的4个字节，**消息流 ID不包含在本块中**。表示此chunk和上一次发的chunk所在的流相同。具有可变大小消息的流，在第一个消息之后的每个消息的第一个块应该使用这个格式。
 
 - timestamp delta：占用3个字节，注意这里和type＝0时不同，存储的是和上一个chunk的时间差。类似上面提到的timestamp，当它的值超过3个字节所能表示的最大值时，三个字节都置为1，实际的时间戳差值就会转存到Extended Timestamp字段中，接受端在判断timestamp delta字段24个位都为1时就会去Extended timestamp中解析时机的与上次时间戳的差值。
 
 
-#####  **类型2**
-![](/Users/leegend/Desktop/tmppic/图片9.png)
+**类型2**
+
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/chunk-messageheader2.png?raw=true)
 
 类型2的块占**3**个字节，相对于type＝1格式又省去了表示消息长度的3个字节和表示消息类型的1个字节。既不包含**流ID**也不包含**消息长度**。本块使用的流ID和消息长度与先前的块相同。具有固定大小消息的流，在第一个消息之后的每个消息的第一个块应该使用这个格式。
 
-#####  **类型3**
+**类型3**
 类型3的块没有头。流ID，消息长度，时间戳都不出现。
 这种类型的块使用与先前块相同的数据。当一个消息被分成多个块，除了第一块以外，所有的块都应使用这种类型。
 
