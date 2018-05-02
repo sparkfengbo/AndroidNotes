@@ -156,7 +156,7 @@ GASpecificConfig的语义如下：
 
 当tag的TagType = 9时，Data里面是VIDEODATA。
 
-![](/Users/leegend/Desktop/tmppic/d1de72173b1b7555d2d0a8ce9c3f7a23.png)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/videodata.png?raw=true)
 
 - 1-4b：帧类型（4bit）；1是关键帧，IDR帧(不一定是I真) 2是inter frame，P帧或者B帧，可参考[维基](https://en.wikipedia.org/wiki/Inter_frame)
 - 5-8b：CodecID（4bit）7是AVC
@@ -167,11 +167,11 @@ GASpecificConfig的语义如下：
 #### 2.5.2 AVCVIDEOPACKET
 
 
-![](/Users/leegend/Desktop/tmppic/ae4cc7814984a2311149a48e62a9ca14.png)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/avcvideopacket.png?raw=true)
 
 - 1-1B：包类型（1B）；
 - 2-4B： CTS， [ISO_IEC_14496-15](http://read.pudn.com/downloads174/sourcecode/multimedia/mpeg/810862/ISO_IEC_14496-15-2004.pdf)中有一段介绍CTS
-- 5-xB：
+- 5-xB：见上图
 
 
 >关于CTS：这是一个比较难以理解的概念，需要和pts，dts配合一起理解。 首先，pts（presentation time stamps），dts(decoder timestamps)，cts(CompositionTime)的概 念： pts：显示时间，也就是接收方在显示器显示这帧的时间。单位为1/90000 秒。 dts：解码时间，也就是rtp包中传输的时间戳，表明解码的顺序。单位单位为1/90000 秒。——根据 后面的理解，pts就是标准中的CompositionTime cts偏移：cts = (pts ­ dts) / 90 。cts的单位是毫秒。 pts和dts的时间不一样，应该只出现在含有B帧的情况下，也就是profile main以上。baseline是没有 这个问题的，baseline的pts和dts一直想吐，所以cts一直为0。 在flv tag中的时戳就是DTS。 研究 一下文档，  ISO/IEC 14496­12:2005(E)      8.15   Time to Sample Boxes，发现 CompositionTime就是presentation time stamps，只是叫法不同。——需要再进一步确认。 在上图中，cp就是pts，显示时间。DT是解码时间，rtp的时戳。 I1是第一个帧，B2是第二个，后面的序号就是摄像头输出的顺序。决定了显示的顺序。 DT，是编码的顺序，特别是在有B帧的情况，P4要在第二个解，因为B2和B3依赖于P4，但是P4的 显示要在B3之后，因为他的顺序靠后。这样就存在显示时间CT(PTS)和解码时间DT的差，就有了CT 偏移。 P4解码时间是10，但是显示时间是40，
@@ -198,7 +198,6 @@ AVCDecoderConfigurationRecord结构如下：
 
 lengthSizeMinusOne加1就是NALU长度字段所占字节数
 
-![](/Users/leegend/Desktop/tmppic/59fe440be33f9dec94c61eba586fa27e.png)
 
 
 ### 2.6 元信息
