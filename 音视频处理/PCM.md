@@ -21,7 +21,7 @@ PCM将信号的强度依照同样的间距分成数段，然后用独特的数�
 
 这三个过程也可称为调制。
 
-![](http://upload-images.jianshu.io/upload_images/952890-8ee8233d9d25a08f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/pcm1.png?raw=true)
 
 **举例：**
 
@@ -33,7 +33,7 @@ PCM将信号的强度依照同样的间距分成数段，然后用独特的数�
 PCM音频数据是未经压缩的音频采样数据裸流，如果是单声道的文件，采样数据按时间的先后顺序依次存入。(它的基本组织单位是BYTE(8bit)或WORD(16bit))。
 如果是双声道的话就按照LRLRLR的方式存储，存储的时候还和机器的大小端有关。大端模式如下图所示：
 
-![image.png](http://upload-images.jianshu.io/upload_images/952890-476d7f235c36dcc3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![image.png](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/pcm2.png?raw=true)
 
 此处参考[多媒体基础知识之PCM数据](http://www.cnblogs.com/CoderTian/p/6657844.html)，具体操作PCM文件的例子参考[该博客](http://blog.csdn.net/leixiaohua1020/article/details/50534316)。
 
