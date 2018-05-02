@@ -1,6 +1,6 @@
 ## AMF
 
-AMF是一个二进制格式，用来序列化对象图（object graph），例如 [ActionScript](https://en.wikipedia.org/wiki/ActionScript)对象、XML，或者用来在AdobeFlash客户端和远程服务之间传递消息。
+AMF是一个二进制格式，用来**序列化对象图（object graph）**，例如 [ActionScript](https://en.wikipedia.org/wiki/ActionScript)对象、XML，或者用来在AdobeFlash客户端和远程服务之间传递消息。
 
 **AMF通常用来在RTMP发送媒体流时建立连接和发送控制命令。**
 
