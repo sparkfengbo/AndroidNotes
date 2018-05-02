@@ -35,7 +35,7 @@ PCM音频数据是未经压缩的音频采样数据裸流，如果是单声道�
 
 ![image.png](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/live/pcm2.png?raw=true)
 
-此处参考[多媒体基础知识之PCM数据](http://www.cnblogs.com/CoderTian/p/6657844.html)，具体操作PCM文件的例子参考[该博客](http://blog.csdn.net/leixiaohua1020/article/details/50534316)。
+此处参考[多媒体基础知识之PCM数据](http://www.cnblogs.com/CoderTian/p/6657844.html)，具体操作PCM文件的例子参考[雷霄骅：视音频数据处理入门：PCM音频采样数据处理](http://blog.csdn.net/leixiaohua1020/article/details/50534316)。
 
 
 对于单声道声音文件，采样数据为八位的短整数（short int 00H-FFH）；
