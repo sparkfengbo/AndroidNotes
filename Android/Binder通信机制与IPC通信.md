@@ -7,7 +7,20 @@
 - 3.多进程可能会引起的问题
 - 4.序列化
 - 5.常用的IPC通信机制（主要介绍AIDL，附带介绍一下匿名共享内存）
+
+	- 5.4 AIDL
+	- 5.7 匿名共享内存
+	
 - 6.Binder的基本原理
+
+
+
+可参考文章
+
+- [Android深入浅出之Binder机制](http://www.cnblogs.com/innost/archive/2011/01/09/1931456.html)
+- [Android Binder设计与实现 - 设计篇](http://blog.csdn.net/universus/article/details/6211589)
+- [Android进程间通信（IPC）机制Binder简要介绍和学习计划](https://blog.csdn.net/luoshengyang/article/details/6618363)
+
 
 ------
 
@@ -248,7 +261,27 @@ mListener.finishBroadcast();
 参考《Android开发艺术探索》 第2章103页，此处不赘述了
 
 
-### 6.Binder
+### 5.7 匿名共享内存
+
+此部分参考《Android系统源代码情景分析》（罗升阳）记录。[博客地址](https://blog.csdn.net/luoshengyang/article/details/6651971)
+
+
+
+>在Android系统中，提供了独特的匿名共享内存子系统Ashmem（Anonymous Shared Memory），它以驱动程序的形式实现在内核空间中。它有两个特点，一是能够辅助内存管理系统来有效地管理不再使用的内存块，二是它通过Binder进程间通信机制来实现进程间的内存共享。
+
+在Android应用程序框架层，提供了一个MemoryFile接口来封装了匿名共享内存文件的创建和使用，它实现在frameworks/base/core/java/android/os/MemoryFile.java文件中。
+
+详细实例请参考实例代码 [AndroidCodeDemoTest](https://github.com/sparkfengbo/AndroidCodeDemoTest) 中的AshmemActivty。
+
+- [Android系统匿名共享内存Ashmem（Anonymous Shared Memory）在进程间共享的原理分析](https://blog.csdn.net/luoshengyang/article/details/6666491)
+
+
+## 6.Binder基本原理
+
+此部分参考《Android系统源代码情景分析》（罗升阳）记录。
+
+
+### 6.1 Binder的优势
 
 Android是基于Linux的，但是为什么需要新设计一个通信机制，Binder？
 
@@ -260,8 +293,10 @@ Android是基于Linux的，但是为什么需要新设计一个通信机制，Bi
 >Binder是在OpenBinder的基础上实现的。
 >
 
+### 6.2 Binder通信过程
+ 
 
-
+**涉及的对象**
 Client进程和Server进程的一次通信涉及四种类型对象，分别是
 
 - 位于Binder驱动程序中的Binder实体对象（binder_node）
@@ -274,34 +309,21 @@ Client进程和Server进程的一次通信涉及四种类型对象，分别是
 
 **过程**
 
-
 - 1.运行在Client进程中的Binder代理对象通过Binder驱动程序向运行在Server进程中的Binder本地对象发出进程间通信请求，Binder驱动程序接着就根据Client进程传递来的Binder代理对象的句柄值找到对应的Binder引用对象
 - 2.Binder驱动程序根据前面找到的Binder引用对象找到对应的Binder实体对象，并创建一个事物（binder_transaction）来描述传递过来的通信数据发送给它处理
 - 3.Binder驱动程序根据前面找到的Binder实体对象来找到运行在Server进程中的Binder本地对象，并且将Client进程传递过来的通信数据发送给它处理
 - 4.Binder本地对象处理完成Client进程的通信请求后就将通信结果返回给Binder驱动程序，Binder驱动程序接着找到前面所创建的一个事物
-- 5.Binder驱动程序根据前面找到的事物的先关属性来找到发出通信请求的Client进程，并且通知Client进程将通信结果返回给对应的Binder代理对象处理
+- 5.Binder驱动程序根据前面找到的事物的相关属性来找到发出通信请求的Client进程，并且通知Client进程将通信结果返回给对应的Binder代理对象处理
 
 
 可以看到涉及的四种对象类型都有相互依赖的关系，所以为了维护这些Binder对象的依赖关系，Binder通信机制采用**引用计数技术**维护每一个Binder对象声明周期。
 
+使用Binder在进程间传递数据的时候，有时候会抛出TransactionTooLargeException这个异常，这个异常的产生是因为Binder驱动对内存的限制引起的。也就是说，我们不能通过Binder传递太大的数据。官方文档里有说明，最大通常限制为1M。参见[TransactionTooLargeException](https://developer.android.com/reference/android/os/TransactionTooLargeException.html)。可以通过MemoryFile解决，参考[Android匿名共享内存和MemoryFile](https://blog.csdn.net/goodlixueyong/article/details/53151959)
 
+---------------------------------------------
 
-
-
-
-
-----
-
+**下面是未整理的部分**
 (**TODO** 底层原理待补充，太复杂了  )
-
-
-可参考文章
-
-- [Android Binder设计与实现 - 设计篇](http://blog.csdn.net/universus/article/details/6211589)
-- *源码分析请参考《罗升阳 Android源代码情景分析》 第5章*
-
-
-
 
 1.Binder进程间通信机制框架
 
