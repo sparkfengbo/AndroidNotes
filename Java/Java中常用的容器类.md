@@ -483,13 +483,19 @@ ArrayDeque的高效来源于head和tail这两个变量，它们使得物理上�
 
 ### <a name="CopyOnWriteArrayList">4.1 CopyOnWriteArrayList </a>
 
+参考[笔记:线程关键字、锁、同步集合.md](https://github.com/sparkfengbo/AndroidNotes/blob/master/Android/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E7%BA%BF%E7%A8%8B%E5%85%B3%E9%94%AE%E5%AD%97%E3%80%81%E9%94%81%E3%80%81%E5%90%8C%E6%AD%A5%E9%9B%86%E5%90%88.md)
 
-###  <a name="CopyOnWriteArrayset">4.2 CopyOnWriteArrayset </a>
+###  <a name="CopyOnWriteArrayset">4.2 CopyOnWriteArrayset </a>
+
+参考[笔记:线程关键字、锁、同步集合.md](https://github.com/sparkfengbo/AndroidNotes/blob/master/Android/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E7%BA%BF%E7%A8%8B%E5%85%B3%E9%94%AE%E5%AD%97%E3%80%81%E9%94%81%E3%80%81%E5%90%8C%E6%AD%A5%E9%9B%86%E5%90%88.md)
 
 ###  <a name="ArrayBlockkingQueue">4.3 ArrayBlockkingQueue </a>
 
+参考[笔记:线程关键字、锁、同步集合.md](https://github.com/sparkfengbo/AndroidNotes/blob/master/Android/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E7%BA%BF%E7%A8%8B%E5%85%B3%E9%94%AE%E5%AD%97%E3%80%81%E9%94%81%E3%80%81%E5%90%8C%E6%AD%A5%E9%9B%86%E5%90%88.md)
+
 ###  <a name="LinkedBlockingQueue">4.4 LinkedBlockingQueue </a>
 
+参考[笔记:线程关键字、锁、同步集合.md](https://github.com/sparkfengbo/AndroidNotes/blob/master/Android/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/%E7%BA%BF%E7%A8%8B%E5%85%B3%E9%94%AE%E5%AD%97%E3%80%81%E9%94%81%E3%80%81%E5%90%8C%E6%AD%A5%E9%9B%86%E5%90%88.md)
 
 
 
