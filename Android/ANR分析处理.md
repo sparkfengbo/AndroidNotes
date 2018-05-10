@@ -3,7 +3,7 @@
 - [Android App 优化之 ANR 详解](https://juejin.im/post/582582df0ce4630058bbbad2)
 - [浅谈ANR及log分析ANR](http://blog.csdn.net/itachi85/article/details/6918761)
 
-#####ANR类型
+#### ANR类型
 
 - 1：KeyDispatchTimeout(5 seconds) --主要类型
 
@@ -17,7 +17,7 @@ BroadcastReceiver在特定时间内无法处理完成
 
 Service在特定的时间内无法处理完成
 
-#####ANR产生原因
+#### ANR产生原因
 超时时间的计数一般是从按键分发给app开始。超时的原因一般有两种：
 
 - (1)当前的事件没有机会得到处理（即UI线程正在处理前一个事件，没有及时的完成或者looper被某种原因阻塞住了）
