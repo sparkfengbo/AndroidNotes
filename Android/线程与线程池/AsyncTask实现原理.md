@@ -28,7 +28,7 @@ public static final Executor THREAD_POOL_EXECUTOR  =
           sThreadFactory);
 ```
 
-THREAD_POOL_EXECUTOR是一个线程池的执行器(有关线程池的可以参考 [这篇文章](http://www.jianshu.com/p/95d42b8590a5) )。在这里你只要了解它是一个核心线程数量是CPU数+1，最大线程数量是2*CPU数量+1就可以了。
+THREAD_POOL_EXECUTOR是一个线程池的执行器(有关线程池的可以参考 [这篇文章](https://github.com/sparkfengbo/AndroidNotes/blob/master/Android/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/Android%E7%BA%BF%E7%A8%8B%E6%B1%A0.md)。在这里你只要了解它是一个核心线程数量是CPU数+1，最大线程数量是2*CPU数量+1就可以了。
 
 **SerialExecutor**
 
@@ -100,6 +100,7 @@ private static abstract class WorkerRunnable<Params, Result> implements Callable
 ```
 当你创建一个AsyncTask的时候就会创建`mWorker`和`mFutureTask`。
 ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/Android/AsyncTask4.png?raw=true)
+
 可以看到，`mWorker`的`call`方法主要的工作是设置`call`是否被调用，调用你重写的`doInBackground`方法，获得`Result`(这个`Result`的类型就是你声明AsyncTask时传入的类型)，再将`Result`调用`postResult`方法返回。关于`postResult`请往下看。
 
 **mFuture**
@@ -145,8 +146,10 @@ private static class AsyncTaskResult<Data> {
 **获取执行结果和更新执行的进度**
 
 先说一说`Handler`。
+
 ![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/Android/AsyncTask5.png?raw=true)
-每个AsyncTask都会获得一个`InternalHandler`的实例。可以看到，`InternalHandler`绑定到了主线程的`Looper`中(关于Looper与Handler的关系，可以参考[这篇文章](http://www.jianshu.com/p/27924ef1ea8f))，所以你在异步线程中执行的结果最终都可以通过`InternalHandler`交给主线程处理。再看`handlerMessage`方法，获得`AsyncTaskResult`对象，如果传的是`MESSAGE_POST_RESULT`类型，就调用AsyncTask的`finish`方法(别忘了`result.mTask`其实就是当前的AsyncTask)。
+
+每个AsyncTask都会获得一个`InternalHandler`的实例。可以看到，`InternalHandler`绑定到了主线程的`Looper`中(关于Looper与Handler的关系，可以参考[这篇文章](https://github.com/sparkfengbo/AndroidNotes/blob/master/Android/%E6%B6%88%E6%81%AF%E6%A1%86%E6%9E%B6.md)，所以你在异步线程中执行的结果最终都可以通过`InternalHandler`交给主线程处理。再看`handlerMessage`方法，获得`AsyncTaskResult`对象，如果传的是`MESSAGE_POST_RESULT`类型，就调用AsyncTask的`finish`方法(别忘了`result.mTask`其实就是当前的AsyncTask)。
 
 `finish`做了什么？
 
@@ -195,13 +198,13 @@ public final boolean cancel(boolean mayInterruptIfRunning) {
 
 ### 注意事项
 
-**1.**由于AsyncTask是单线程顺序执行的，所以不要用AsyncTask执行耗时太久的操作，如果有很多耗时太久的线程，最好使用线程池。
+**1.** 由于AsyncTask是单线程顺序执行的，所以不要用AsyncTask执行耗时太久的操作，如果有很多耗时太久的线程，最好使用线程池。
 
-**2.**`onPreExecute`、`onProgressUpdate`、`onPostExecute`都是在UI线程调用的，`doInBackground`在后台线程执行。
+**2.** `onPreExecute`、`onProgressUpdate`、`onPostExecute`都是在UI线程调用的，`doInBackground`在后台线程执行。
 
-**3.**调用`cancel`方法取消任务执行，这个时候`onPostExecute`就不会执行了，取而代之的是`cancel`方法，所以为了尽快的退出任务的执行，在`doInBackground`中调用`isCancelled`检查是否取消的状态。
+**3.** 调用`cancel`方法取消任务执行，这个时候`onPostExecute`就不会执行了，取而代之的是`cancel`方法，所以为了尽快的退出任务的执行，在`doInBackground`中调用`isCancelled`检查是否取消的状态。
 
-**4.**其他
+**4.** 其他
 
 - AsyncTask类一定要在主线程加载
 - AsyncTask类的实例一定在主线程创建
