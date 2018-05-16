@@ -120,6 +120,10 @@ final class Explore extends java.lang.Enum {
 
 ```
 
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/JavaBCXS/%E6%9E%9A%E4%B8%BE1.png?raw=true)
+
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/JavaBCXS/%E6%9E%9A%E4%B8%BE2.png?raw=true)
+
 ## 20.注解
 
 也被称为元数据.

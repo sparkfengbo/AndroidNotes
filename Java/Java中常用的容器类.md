@@ -106,6 +106,7 @@ static final int hash(Object key) {
 
 当put时，如果发现目前的bucket占用程度已经超过了Load Factor所希望的比例，那么就会发生resize。在resize的过程，简单的说就是把bucket扩充为2倍，之后重新计算index，把节点再放到新的bucket中。
 
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/JavaBCXS/hashmapresize.png?raw=true)
 
 #### 2.1.7 红黑树和链表的实现
 
