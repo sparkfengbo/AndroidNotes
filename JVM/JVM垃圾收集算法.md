@@ -213,7 +213,7 @@
 > - 新生代GC（MinorGC）：指发生在新生代的垃圾收集动作，因为Java对象大多都具备朝生夕灭的特性，所以MinorGC非常频繁，一般回收速度也比较快。
 > - 老年代GC（MajorGC/FullGC）：指发生在老年代的GC，出现了MajorGC，经常会伴随至少一次的MinorGC（但非绝对的，在ParallelScavenge收集器的收集策略里就有直接进行MajorGC的策略选择过程）。MajorGC的速度一般会比MinorGC慢10倍以上。
 
---
+
 
 >大多数情况下，对象在新生代Eden区中分配。当Eden区没有足够空间进行分配时，虚拟机将发起一次MinorGC。
 
