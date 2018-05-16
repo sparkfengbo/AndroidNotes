@@ -20,6 +20,7 @@
 - [Android深入浅出之Binder机制](http://www.cnblogs.com/innost/archive/2011/01/09/1931456.html)
 - [Android Binder设计与实现 - 设计篇](http://blog.csdn.net/universus/article/details/6211589)
 - [Android进程间通信（IPC）机制Binder简要介绍和学习计划](https://blog.csdn.net/luoshengyang/article/details/6618363)
+- [Binder学习指南](http://weishu.me/2016/01/12/binder-index-for-newer/)
 
 
 ------

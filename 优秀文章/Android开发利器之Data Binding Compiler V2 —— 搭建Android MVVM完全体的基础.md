@@ -1,0 +1,1 @@
+- [Android开发利器之Data Binding Compiler V2 —— 搭建Android MVVM完全体的基础](http://tangpj.com/2018/05/12/data_binding_compiler_v2_1/?hmsr=toutiao.io&utm_medium=toutiao.io&utm_source=toutiao.io)
