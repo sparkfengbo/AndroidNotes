@@ -18,22 +18,22 @@ public static final Executor THREAD_POOL_EXECUTOR
 这个`THREAD_POOL_EXECUTOR`就是一个线程池，线程池都实现了ExecutorService的接口，定义了execute，shutdown，submit等方法。
 下面解释一下参数的含义。
 
-**corePoolSize**
+- **corePoolSize**
 `corePoolSize`表示核心线程数，`corePoolSize`数量的线程会一直存活，除非设置了`allowCoreThreadTimeOut`。
 
-**maximumPoolSize**
+- **maximumPoolSize**
 `maximumPoolSize`是最大线程数量，`maximumPoolSize`一定是大于`corePoolSize`的，否则会报错。当当前线程数量大于`corePoolSize`小于`maximumPoolSize`，并且阻塞队列满了，则创建新线程。
 
-**keepAliveTime**
+- **keepAliveTime**
 `keepAliveTime`代表最大线程数量内，核心线程外的线程在空闲多久内不会被销毁，也就是超过这个时间就会销毁。
 
-**unit**
+- **unit**
 `TimeUnit.SECONDS`代表`keepAliveTime`的时间单位。
 
-**workQueue**
+- **workQueue**
 在任务执行前保存任务的队列，当当前线程池线程数量达到`corePoolSize`并且当前所有线程都处于活动状态，则execute提交的runnable保存到队列中。
 
-**threadFactory**
+- **threadFactory**
 当executor创建新线程的时候的工厂方法
 例如：
 
@@ -95,9 +95,10 @@ public static ExecutorService newCachedThreadPool() {
 ```
 创建一个核心线程数量0，最大线程数量为Integer.MAX_VALUE的线程池，线程存活时间60s，任务队列为SynchronousQueue。
 
->**关于SynchronousQueue**
+**关于SynchronousQueue**
 
-SynchronousQueue是一个阻塞队列，内部没有容量，也就是capacity是0，每一个insert操作必须等另一个线程的remove操作。对SynchronousQueue使用peek操作都会返回null,也不能使用迭代器iterate。
+>SynchronousQueue是一个阻塞队列，内部没有容量，也就是capacity是0，每一个insert操作必须等另一个线程的remove操作。对SynchronousQueue使用peek操作都会返回null,也不能使用迭代器iterate。
+>- [java并发之SynchronousQueue实现原理](https://blog.csdn.net/yanyan19880509/article/details/52562039)
 
 
 - **4.newScheduledThreadPool**
@@ -122,12 +123,10 @@ public ScheduledFuture<?> scheduleAtFixedRate(Runnable command, long initialDela
 ```
 `initialDelay`是第一次执行延长的时间，`period`是执行周期的次数。
 
-> DelayedWorkQueue
+**DelayedWorkQueue**
 
-DelayedWorkQueue是ScheduledThreadPoolExecutor的内部类。
-
-[Java线程学习笔记（十一） DelayQueue的应用
-](http://ideasforjava.iteye.com/blog/657384)
+>DelayedWorkQueue是ScheduledThreadPoolExecutor的内部类。
+>[Java线程学习笔记（十一） DelayQueue的应用](http://ideasforjava.iteye.com/blog/657384)
 
 ### 3.任务队列
 
@@ -154,6 +153,7 @@ DelayedWorkQueue是ScheduledThreadPoolExecutor的内部类。
 
 ### 4.拒绝策略RejectedExcutionHandler
 
+当线程池的任务缓存队列已满并且线程池中的线程数目达到maximumPoolSize，如果还有任务到来就会采取任务拒绝策略。
 `AbortPolicy`、`CallerRunsPolicy`、`DiscardOldestPolicy`、`DiscardPolicy`都是在ThreadPoolExecutor中声明的。
 
 - **AbortPolicy**
@@ -201,12 +201,16 @@ public void rejectedExecution(Runnable r, ThreadPoolExecutor e) {}
 
 
 
+**举例**
+
+```
+    ThreadPoolExecutor pool = xxxxxx;  
+    pool.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());  
+```
 
 
 
--------
-
-
+### AsyncTask源码中的设置
 在AsyncTask中，核心线程数量是CPU数量+1.
 
 
