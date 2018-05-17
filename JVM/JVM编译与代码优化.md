@@ -52,12 +52,12 @@
     public static void main(String[] args){
         List＜Integer＞list = Arrays.asList(1,2,3,4);
         //如果 在 JDK 1. 7 中, 还有 另外 一颗 语法 糖 
-        // 能 让 上面 这句 代码 进一步 简写 成 List ＜ Integer ＞ list=[ 1, 2, 3, 4]; 
+        // 能 让 上面 这句 代码 进一步 简写 成 List ＜Integer＞ list=[ 1, 2, 3, 4]; 
         int sum= 0; 
         for( int i: list) {
             sum+= i; 
         }
-        System. out. println( sum); 
+        System.out.println(sum); 
     }
 ```
 
@@ -67,18 +67,18 @@
 
 ```
  public static void main( String[] args){
-        List list= Arrays. asList( new Integer[]{
-                Integer. valueOf( 1),
-                Integer. valueOf( 2),
-                Integer. valueOf( 3),
-                Integer. valueOf( 4)
+        List list = Arrays.asList(new Integer[]{
+                Integer.valueOf(1),
+                Integer.valueOf(2),
+                Integer.valueOf(3),
+                Integer.valueOf(4)
         });
         int sum= 0;
-        for( Iterator localIterator= list. iterator(); localIterator. hasNext();){
-            int i=(( Integer) localIterator. next()). intValue();
+        for(Iterator localIterator = list.iterator(); localIterator.hasNext();){
+            int i=((Integer)localIterator. next()).intValue();
             sum+= i;
         }
-        System. out. println( sum);
+        System.out.println(sum);
     }
 ```
 
@@ -95,7 +95,7 @@
 - [java 语法糖-自动装箱的陷阱](http://lizhensan.iteye.com/blog/1689176)
 
 ```
- 1 		public static void main(String args[]) {
+ 1 	public static void main(String args[]) {
  2         Integer a = 1;
  3         Integer b = 2;
  4         Integer c = 3;
@@ -208,10 +208,10 @@ int d=E*13+a*2；
 
 ```
 	if（foo!=null）{
-		returnfoo.value；
+	    returnfoo.value；
 	} else {
-		thrownewNullPointException()；
-		}
+	    thrownewNullPointException()；
+	}
 ```
 
 >在使用隐式异常优化之后，虚拟机会把上面伪代码所表示的访问过程变为如下伪代码。
@@ -219,9 +219,9 @@ int d=E*13+a*2；
 
 ```
 	try {
-		returnfoo.value；
+	    returnfoo.value；
 	} catch（segment_fault）{
-		uncommon_trap()；
+	    uncommon_trap()；
 	}
 ```
 
