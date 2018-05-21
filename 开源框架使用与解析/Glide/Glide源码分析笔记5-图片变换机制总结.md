@@ -230,7 +230,7 @@ TransformationUtils.java
 仿照CenterCrop类实现BitmapTransformation接口就可以。
 
 
-glide-transformations的项目主页地址是 ![https://github.com/wasabeef/glide-transformations](https://github.com/wasabeef/glide-transformations)。
+glide-transformations的项目主页地址是 [https://github.com/wasabeef/glide-transformations](https://github.com/wasabeef/glide-transformations)。
 
 ```
 Glide.with(this)
