@@ -239,7 +239,7 @@ Glide.with(this)
      .into(imageView);
 ```
 
-![](http://img.blog.csdn.net/20170823205319689?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VvbGluX2Jsb2c=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/Android/glide/glide5-1.png?raw=true)
 
 ```
 Glide.with(this)
@@ -248,4 +248,4 @@ Glide.with(this)
      .into(imageView);
 ```
 
-![](http://img.blog.csdn.net/20170823205616112?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VvbGluX2Jsb2c=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/Android/glide/glide5-2.png?raw=true)

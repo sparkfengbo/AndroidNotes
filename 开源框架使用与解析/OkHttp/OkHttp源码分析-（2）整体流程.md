@@ -288,9 +288,9 @@ Dispatcher的maxRequests默认是64，也就是OkHttp默认最大支持64个请�
 
 重要的是runningSyncCalls 、runningAsyncCalls和readyAsyncCalls。他们的类型是ArrayDeque。分别代表了正在执行的同步请求队列，正在执行的异步请求队列，等待执行的异步请求队列。
 
-异步请求队列的执行在核心线程0，最大线程数Integer.MAX_VALUE,队列类型是SynchronousQueue的线程池。
+异步请求队列的执行在核心线程0，最大线程数Integer.MAX_VALUE,队列类型是[SynchronousQueue](https://github.com/sparkfengbo/AndroidNotes/blob/master/Android/%E7%BA%BF%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B%E6%B1%A0/Android%E7%BA%BF%E7%A8%8B%E6%B1%A0.md)的线程池。
 
-讲到这里是不是需要再次补充一下Java的容器支持呢？ ：）
+讲到这里是不是需要再次补充一下[Java的容器知识](https://github.com/sparkfengbo/AndroidNotes/blob/master/Java/Java%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E5%AE%B9%E5%99%A8%E7%B1%BB.md)呢？ ：）
 
 可以看到Dispatcher其实是一个很轻的类，主要是将请求添加和移除队列或线程池而已。记得上小结的getResponseWithInterceptorChain吗？接下来我们看看getResponseWithInterceptorChain做了什么.
 

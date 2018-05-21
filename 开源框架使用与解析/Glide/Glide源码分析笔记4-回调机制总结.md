@@ -28,7 +28,7 @@ Glide.with(mContext).load(url).into(holder.entry_list_ige);
 
 Target的继承关系如图
 
-![](http://img.blog.csdn.net/20170614222823388?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZ3VvbGluX2Jsb2c=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/Android/glide/glide4.png?raw=true)
 
 主要考虑SimpleTarget和ViewTarget
 
