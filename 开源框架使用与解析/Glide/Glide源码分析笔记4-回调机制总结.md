@@ -7,7 +7,7 @@
 - 1.Target接口
 - 2.preload方法
 - 3.downloadOnly
-- 4. listener
+- 4.listener
 
 
 ------
