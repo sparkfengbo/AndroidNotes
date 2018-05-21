@@ -29,12 +29,11 @@
 、、TODO
 
 - [JNI]
-- [CMAKE]()
+- [CMAKE相关](https://github.com/sparkfengbo/AndroidNotes/blob/master/%E9%9F%B3%E8%A7%86%E9%A2%91%E5%A4%84%E7%90%86/CMake%20Practice.pdf)
 
 ### 4.ffmpeg相关
 
 - [雷晓华]()
-
 
 
 ### 步骤1：下载
@@ -107,3 +106,9 @@ https://blog.csdn.net/leixiaohua1020/article/details/25430449
 其中有两个error让我记得特别清晰，其中一个说是C++的标准什么的 “#d”Pxxx   中间加空格。
 
 另一个是show_childe_help的方法命名的问题，参数AVclass *class改成 AVclass *avclass。
+
+## 3. 第二个Demo，将YUV编码为H264
+
+## 4. 第三个Demo，将YUV编码为H264
+
+## 5. 第四个Demo，将YUV编码为H264
