@@ -1,9 +1,9 @@
 参考[维基百科](https://zh.wikipedia.org/wiki/%E9%80%B2%E9%9A%8E%E9%9F%B3%E8%A8%8A%E7%B7%A8%E7%A2%BC)、[知乎问题](https://www.zhihu.com/question/20629995)等资料对AAC格式进行总结，没有特别深入到细节，目的是让大家对AAC有一个总体的认识。
 
-## 1.AAC是什么
+##1.AAC是什么
 **高级音频编码**（英语：**A**dvanced **A**udio **C**oding，AAC），出现于1997年，基于[MPEG-2](https://zh.wikipedia.org/wiki/MPEG-2)的[音频](https://zh.wikipedia.org/wiki/%E9%9F%B3%E8%A8%8A)[编码](https://zh.wikipedia.org/wiki/%E7%B7%A8%E7%A2%BC)技术。由Fraunhofer IIS、杜比实验室、AT&T、Sony、Nokia等公司共同开发。2000年，[MPEG-4](https://zh.wikipedia.org/wiki/MPEG-4)标准出现后，AAC重新集成了其特性，加入了SBR技术和PS技术，为了区别于传统的MPEG-2 AAC又称为MPEG-4 AAC。
 
-## 2.AAC封装格式
+##2.AAC封装格式
 
 ------
 （参考[鹏小鹕](https://www.zhihu.com/people/peng-xiao-hu-60)在问题[AAC-LC 是什么格式？和 AAC 有什么区别？](https://www.zhihu.com/question/20629995)中的回答）
@@ -40,7 +40,7 @@ ADTS的头信息分为两部分，一个是固定头信息、紧接着是可变�
 
 在FFmpeg的adtsenc.c 中定义了[adts_write_frame_header](http://ffmpeg.org/doxygen/3.2/adtsenc_8c.html#a7bd77f94eef0965c207e6448d81e8d3c)方法，可以写ADTS头，大家可以参考。
 
-## 2.1.部分参数介绍
+##2.1.部分参数介绍
 
 序号5的profile是AOT - 1，AOT参考[这里](https://wiki.multimedia.cx/index.php/MPEG-4_Audio#Audio_Object_Types)
 
@@ -61,7 +61,7 @@ adts_buffer_fullness：0x7FF 说明是码率可变的码流。
 
 ---------
 
-## 3.AAC规格
+##3.AAC规格
 因为AAC是一个庞大家族，他们共分为9种规格，以适应不同场合的需要，也正是由于AAC的规格（Profile）繁多，导致普通电脑用户感觉十分困扰：
 MPEG-2 AAC LC低复杂度规格（Low Complexity）
 MPEG-2 AAC Main主规格

@@ -387,7 +387,7 @@ class LoggingInterceptor implements Interceptor {
 
 其实通过ApplicationInterceptorChain的proceed方法也可以看出 拦截器是支持链式调用的，也就是有先后顺序。
 
-![](https://raw.githubusercontent.com/wiki/square/okhttp/interceptors@2x.png)
+![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/Android/glide/oksttp2.png?raw=true)
 
 拦截器分两类
 
