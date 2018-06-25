@@ -115,3 +115,6 @@ https://blog.csdn.net/leixiaohua1020/article/details/25430449
 其中有两个error让我记得特别清晰，其中一个说是C++的标准什么的 “#d”Pxxx   中间加空格。
 
 另一个是show_childe_help的方法命名的问题，参数AVclass *class改成 AVclass *avclass。
+
+
+编译  rtmp  http://zhengxiaoyong.me/2016/11/20/%E7%AE%80%E8%BF%B0RTMPDump%E4%B8%8E%E7%BC%96%E8%AF%91%E7%A7%BB%E6%A4%8D/

@@ -1,2 +1,2 @@
-- [破译Android性能优化中的16ms问题
-](https://www.jianshu.com/p/a769a6028e51)
+- [Android性能优化来龙去脉总结	
+](https://juejin.im/post/5b194563e51d4506d25e20f5)
