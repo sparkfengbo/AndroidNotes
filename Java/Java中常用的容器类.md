@@ -426,7 +426,7 @@ TreeSet是基于TreeMap实现的，也非常简单，同样的只是用key及其
 
 利用TreeMap的特性，实现了set的**有序性**(通过红黑树实现，这里的有序性指的是排序后的顺序，对于某些类型的元素，需要传递自定义的Comparable)。
 
-TreeSet添加null时，如果再添加不是null的元素，就会报NullPointerException异常
+TreeSet添加null时，就会报NullPointerException异常
 
 - [Java TreeSet工作原理及实现](http://yikun.github.io/2015/04/10/Java-TreeSet%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%8F%8A%E5%AE%9E%E7%8E%B0/)
 
@@ -437,7 +437,7 @@ TreeSet添加null时，如果再添加不是null的元素，就会报NullPointer
 | --------  | :----: |
 | LinkedHashSet是否允许空  | 允许，但最多一个   |
 | LinkedHashSet是否允许重复数据  | 不允许   |
-| LinkedHashSet是否有序  | 不保证有序   |
+| LinkedHashSet是否有序  | 保证有序   |
 | LinkedHashSet是否线程安全  | 非线程安全   |
 
 继承自HashSet，内部使用LinkedHashMap维持双向的链表。

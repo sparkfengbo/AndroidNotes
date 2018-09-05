@@ -1,1 +1,2 @@
 - [Android中dip、dp、sp、pt和px](https://github.com/GcsSloop/AndroidNote/blob/master/ChaosCrystal/Android%E4%B8%ADdip%E3%80%81dp%E3%80%81sp%E3%80%81pt%E5%92%8Cpx.md#%E5%B7%A5%E5%85%B7%E5%8C%85)
+- [android适配(一) 之dp、dip、dpi、px、sp简介及相关换算](https://blog.csdn.net/qq_23042121/article/details/53118853)
