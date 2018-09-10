@@ -32,7 +32,8 @@
 >与之相对应的是，在Java虚拟机里面提供了5条方法调用字节码指令，分别如下。 
 > 
 > - invokestatic：调用静态方法。
-> - invokespecial：调用实例构造器＜init＞方法、私有方法和父类方法。invokevirtual：调用所有的虚方法。
+> - invokespecial：调用实例构造器＜init＞方法、私有方法和父类方法。
+> - invokevirtual：调用所有的虚方法。
 > - invokeinterface：调用接口方法，会在运行时再确定一个实现此接口的对象。
 > - invokedynamic：先在运行时动态解析出调用点限定符所引用的方法，然后再执行该方法，在此之前的4条调用指令，分派逻辑是固化在Java虚拟机内部的，而invokedynamic指令的分派逻辑是由用户所设定的引导方法决定的。
 > 

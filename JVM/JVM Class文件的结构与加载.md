@@ -24,7 +24,7 @@ Class文件是一组以8位字节为基础单位的二进制流，各个数据�
 
 表是由多个无符号数或者其他表作为数据项构成的复合数据类型，所有表都习惯性地以"_info"结尾。
 
-![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/JVM/Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png?raw=true)
+![](https://raw.githubusercontent.com/sparkfengbo/AndroidNotes/master/PictureRes/JVM/Class%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F.png)
 
 无论是无符号数还是表，当需要描述同一类型但数量不定的多个数据时，经常会使用一个前置的容量计数器加若干个连续的数据项的形式，这时称这一系列连续的某一类型的数据为某一类型的集合。
 
@@ -164,7 +164,7 @@ Class文件是一组以8位字节为基础单位的二进制流，各个数据�
 
 解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程.
 
-符号引用在前一章讲解Class文件格式的时候已经出现过多次，在Class文件中它以CONSTANT_Class_info、CONSTANT_Fieldref_info、CONSTANT_Methodref_info等类型的常量出现，那解析阶段中所说的直接引用与符号引用又有什么关联呢？
+符号引用在前一章讲解Class文件格式的时候已经出现过多次，在Class文件中它以`CONSTANT_Class_info`、`CONSTANT_Fieldref_info`、`CONSTANT_Methodref_info`等类型的常量出现，那解析阶段中所说的直接引用与符号引用又有什么关联呢？
 
 **符号引用（SymbolicReferences）**：符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到内存中。各种虚拟机实现的内存布局可以各不相同，但是它们能接受的符号引用必须都是一致的，因为符号引用的字面量形式明确定义在Java虚拟机规范的Class文件格式中。
 

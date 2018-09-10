@@ -33,7 +33,8 @@
 
 ### 3.双亲委派模型
 
-![](https://github.com/sparkfengbo/AndroidNotes/blob/master/PictureRes/JVM/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B.png?raw=true)
+
+![](https://raw.githubusercontent.com/sparkfengbo/AndroidNotes/master/PictureRes/JVM/%E5%8F%8C%E4%BA%B2%E5%A7%94%E6%B4%BE%E6%A8%A1%E5%9E%8B.png)
 
 双亲委派模型要求除了顶层的启动类加载器外，其余的类加载器都应当有自己的父类加载器。这里类加载器之间的父子关系一般不会以继承（Inheritance）的关系来实现，而是都使用组合（Composition）关系来复用父加载器的代码。
 
