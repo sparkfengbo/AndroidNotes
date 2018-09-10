@@ -3,6 +3,9 @@
 
 周志明. 深入理解Java虚拟机：JVM高级特性与最佳实践（第2版） (原创精品系列) (Kindle位置1405). 机械工业出版社. Kindle 版本. 
 
+
+ - [图解Java 垃圾回收机制](https://blog.csdn.net/justloveyou_/article/details/71216049)
+
 ----
 
 
@@ -233,9 +236,6 @@
 ### 6.5 空间分配担保
 >
 >在发生MinorGC之前，虚拟机会先检查老年代最大可用的连续空间是否大于新生代所有对象总空间，如果这个条件成立，那么MinorGC可以确保是安全的。如果不成立，则虚拟机会查看HandlePromotionFailure设置值是否允许担保失败。如果允许，那么会继续检查老年代最大可用的连续空间是否大于历次晋升到老年代对象的平均大小，如果大于，将尝试着进行一次MinorGC，尽管这次MinorGC是有风险的；如果小于，或者HandlePromotionFailure设置不允许冒险，那这时也要改为进行一次FullGC。
-
-
-
 
 
 

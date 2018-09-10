@@ -38,6 +38,10 @@
 
 ### 2.分派
 
+**推荐文章**
+
+- [JVM--详解虚拟机字节码执行引擎之静态链接、动态链接与分派](https://blog.csdn.net/championhengyi/article/details/78760590)
+
 分派（Dispatch）调用则可能是静态的也可能是动态的。
 
 
