@@ -3,6 +3,8 @@
 
 周志明. 深入理解Java虚拟机：JVM高级特性与最佳实践（第2版） (原创精品系列) (Kindle位置980). 机械工业出版社. Kindle 版本. 
 
+- [JVM 内存模型概述](http://www.wanandroid.com/blog/show/2152)
+
 -----
 
 ## 1.内存划分

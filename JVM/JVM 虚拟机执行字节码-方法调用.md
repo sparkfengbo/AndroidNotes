@@ -1,7 +1,10 @@
 **参考**
 
 - 周志明. 深入理解Java虚拟机：JVM高级特性与最佳实践（第2版） (原创精品系列) (Kindle位置980). 机械工业出版社. Kindle 版本. 
+
 - [多态性实现机制——静态分派与动态分派](http://wiki.jikexueyuan.com/project/java-vm/polymorphism.html)
+- [JVM--详解虚拟机字节码执行引擎之静态链接、动态链接与分派](https://blog.csdn.net/championhengyi/article/details/78760590)
+
 ----
 
 **方法调用并不等同于方法执行，方法调用阶段唯一的任务就是确定被调用方法的版本（即调用哪一个方法），暂时还不涉及方法内部的具体运行过程。**
