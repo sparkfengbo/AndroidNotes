@@ -10,6 +10,7 @@
 apktool、dex2jar、jd-gui
 
 [下载地址](http://download.csdn.net/download/hanhailong726188/8323371)
+[备份地址](https://blog.csdn.net/onlydyf/article/details/61199900)
 
 ####2.Apktool
 
